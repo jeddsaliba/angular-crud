@@ -5,9 +5,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 The purpose of this project is to showcase an Angular Project with basic CRUD functionalities.
 
 ## Table of Contents
-[Installation](#installation)<br>
-[Development Server](#development-server)<br>
+[Dependencies](#dependencies)<br/>
+[Installation](#installation)<br/>
+[Development Server](#development-server)<br/>
 [Support](#support)
+
+<a name="installation"></a>
+## Dependencies
+To install the Backend (API), click [here](https://github.com/jeddsaliba/laravel-crud).
 
 <a name="installation"></a>
 ## Installation
