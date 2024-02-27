@@ -1,0 +1,27 @@
+<mat-drawer-container autosize class="h-100-per bg-default">
+    <mat-drawer #drawer color="primary" fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false">
+      <!-- <mat-toolbar class="h-auto p-0">
+        <img src="/assets/images/logo.png" width="271.89">
+      </mat-toolbar> -->
+      <mat-nav-list>
+        <mat-accordion multi>
+          <a mat-list-item routerLink="/dashboard">
+            <span>Dashboard</span>
+          </a>
+          <a mat-list-item routerLink="/project">
+            <span>Projects</span>
+          </a>
+          <a mat-list-item routerLink="/user">
+            <span>Users</span>
+          </a>
+        </mat-accordion>
+      </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <app-toolbar [user]="user"></app-toolbar>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

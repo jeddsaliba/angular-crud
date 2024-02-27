@@ -1,0 +1,57 @@
+<app-loader *ngIf="!isLoaded"></app-loader>
+
+<mat-grid-list cols="1" rows="1" rowHeight="100%">
+    <mat-grid-tile>
+        <div class="container">
+            <div class="row justify-content-center">
+              <!-- <div class="col">
+                Column
+              </div> -->
+              <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10 col-12">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Angular CRUD</mat-card-title>
+                        <mat-card-subtitle>Please log in to your account</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <form [formGroup]="loginForm" (ngSubmit)="onHandleSubmit()">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <app-input
+                                        [formGroup]="loginForm"
+                                        [type]="'email'"
+                                        [controlName]="'email'"
+                                        [fieldName]="'Email'"
+                                        [placeholder]="'Enter email'"
+                                        [required]="true"
+                                    ></app-input>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <app-input
+                                        [formGroup]="loginForm"
+                                        [type]="'password'"
+                                        [controlName]="'password'"
+                                        [fieldName]="'Password'"
+                                        [placeholder]="'Enter password'"
+                                        [required]="true"
+                                    ></app-input>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" mat-raised-button [disabled]="!loginForm.valid || !isLoaded" color="primary">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+              </div>
+              <!-- <div class="col">
+                Column
+              </div> -->
+            </div>
+          </div>
+    </mat-grid-tile>
+</mat-grid-list>

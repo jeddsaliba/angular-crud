@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("~bootstrap/dist/css/bootstrap");
+@import "./assets/scss/colors";
+
+@import "./assets/scss/theme";
+@import "./assets/scss/datatables";
+@import "./assets/scss/breadcrumb";
+@import "./assets/scss/mixin";
+
+@include loop(8, 50, 1, ".fs-", "", "font-size", "px", "!important");
+@include loop(8, 50, 1, ".fs-", "-pt", "font-size", "pt", "!important");
+@include loop(8, 50, 1, ".ti-", "", "text-indent", "px", "!important");
+@include loop(1, 900, 100, ".fw-", "", "font-weight", "", "!important");
+@include loop(1, 50, 1, ".lh-", "", "line-height", "px", "!important");
+@include loop(1, 500, 1, ".h-", "", "height", "px", "!important");
+@include loop(0, 1500, 1, ".w-", "", "width", "px", "!important");
+@include loop(1, 100, 1, ".h-", "-per", "height", "%", "!important");
+@include loop(0, 180, 1, ".w-", "-per", "width", "%", "");
+@include loop(0, 100, 1, ".mw-", "-per", "max-width", "%", "");
+@include loop(0, 150, 1, ".mh-", "", "min-height", "px", "!important");
+
+@include loop(0, 100, 1, ".p-", "", "padding", "px", "!important");
+@include loop(0, 100, 1, ".pt-", "", "padding-top", "px", "!important");
+@include loop(0, 100, 1, ".pr-", "", "padding-right", "px", "!important");
+@include loop(0, 100, 1, ".pl-", "", "padding-left", "px", "!important");
+@include loop(0, 100, 1, ".pb-", "", "padding-bottom", "px", "!important");
+
+@include loop(0, 100, 1, ".m-", "", "margin", "px", "!important");
+@include loop(0, 100, 1, ".mt-", "", "margin-top", "px", "!important");
+@include loop(0, 100, 1, ".mr-", "", "margin-right", "px", "!important");
+@include loop(0, 100, 1, ".ml-", "", "margin-left", "px", "!important");
+@include loop(0, 100, 1, ".mb-", "", "margin-bottom", "px", "!important");
+
+@include loop(-100, 0, 1, ".m-", "", "margin", "px", "!important");
+@include loop(-100, 0, 1, ".mt-", "", "margin-top", "px", "!important");
+@include loop(-100, 0, 1, ".mr-", "", "margin-right", "px", "!important");
+@include loop(-100, 0, 1, ".ml-", "", "margin-left", "px", "!important");
+@include loop(-100, 0, 1, ".mb-", "", "margin-bottom", "px", "!important");
+
+@include loop(-100, 100, 1, ".t-", "", "top", "px", "!important");
+@include loop(-100, 0, 1, ".b-", "", "bottom", "px", "!important");
+@include loop(-100, 0, 1, ".r-", "", "right", "px", "!important");
+@include loop(-100, 0, 1, ".l-", "", "left", "px", "!important");
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

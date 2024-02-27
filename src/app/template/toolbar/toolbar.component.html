@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+    <div mat-card-avatar class="logo mr-16"></div>
+    <span>{{ appName }}</span>
+    <span class="spacer"></span>
+    <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon class="mr-16">face</mat-icon>
+        <span>{{ user$?.name }}</span>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onHandleGoToProfile()">
+            <mat-icon>account_circle</mat-icon>
+            <span>My Profile</span>
+          </button>
+        <button mat-menu-item (click)="onHandleLogout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+    </mat-menu>
+</mat-toolbar>
