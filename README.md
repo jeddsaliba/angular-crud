@@ -1,6 +1,8 @@
-# AngularCrud
+# Angular CRUD
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
+
+The purpose of this project is to showcase an Angular Project with basic CRUD functionalities.
 
 ## Table of Contents
 [Installation](#installation)<br>
