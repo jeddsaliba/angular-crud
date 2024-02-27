@@ -11,8 +11,8 @@ export class DialogEffect {
     () => {
       return this.actions$.pipe(
         ofType(DialogType.NOTIFICATION_SUCCESS_DIALOG),
-        switchMap(({ payload: { message } }) => {
-          return of(this._snackBar.open(message, 'OK', { duration: 3000 }));
+        switchMap(({payload}) => {
+          return of(this._snackBar.open(payload, 'OK', { duration: 3000 }));
         })
       );
     },
@@ -22,8 +22,8 @@ export class DialogEffect {
     () => {
       return this.actions$.pipe(
         ofType(DialogType.NOTIFICATION_ERROR_DIALOG),
-        switchMap(({ payload: { message } }) => {
-          return of(this._snackBar.open(message, 'OK', { duration: 3000 }));
+        switchMap(({payload}) => {
+          return of(this._snackBar.open(payload, 'OK', { duration: 3000 }));
         })
       );
     },

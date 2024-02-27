@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { AuthService } from "src/app/services/auth/auth.service";
-import { login, loginSuccess } from "./user.action";
+import { login, loginSuccess, logout, logoutSuccess } from "./user.action";
 import { catchError, exhaustMap, map, of, switchMap, tap } from "rxjs";
 import { UserType } from "./user.type";
 import { notificationErrorDialog, notificationSuccessDialog } from "../dialog/dialog.action";
@@ -16,32 +16,37 @@ export class UserEffect {
             ofType(UserType.LOGIN),
             switchMap(({payload}) => {
                 return this.authService.login(payload).pipe(
-                    tap((payload) => {
-                        console.log("pay", payload);
-                        sessionStorage.setItem('access_token', payload?.payload?.access_token);
-                        sessionStorage.setItem('user', JSON.stringify(payload?.payload?.user));
-                        this.store$.dispatch(notificationSuccessDialog(payload));
+                    map((result) => {
+                        return loginSuccess(result);
+                    }),
+                    tap(({payload}) => {
+                        const { result } = payload;
+                        sessionStorage.setItem('access_token', result?.access_token);
+                        sessionStorage.setItem('user', JSON.stringify(result?.user));
+                        this.store$.dispatch(notificationSuccessDialog(payload?.message));
                         this.router.navigate(['/dashboard']);
                     }),
-                    catchError(({error}) => of(notificationErrorDialog(error)))
+                    catchError(({error}) => of(notificationErrorDialog(error?.message)))
                 )
             })
         )
-    }, { dispatch: false });
+    });
     _logout = createEffect(() => {
         return this.actions$.pipe(
             ofType(UserType.LOGOUT),
             switchMap(() => {
                 return this.authService.logout().pipe(
-                    tap((payload) => {
-                        console.log("pay", payload);
+                    map((result) => {
+                        return logoutSuccess(result);
+                    }),
+                    tap(({payload}) => {
                         sessionStorage.clear();
-                        this.store$.dispatch(notificationSuccessDialog(payload));
+                        this.store$.dispatch(notificationSuccessDialog(payload?.message));
                         this.router.navigate(['/login']);
                     }),
-                    catchError(({error}) => of(notificationErrorDialog(error)))
+                    catchError(({error}) => of(notificationErrorDialog(error?.message)))
                 )
             })
         )
-    }, { dispatch: false });
+    });
 }
