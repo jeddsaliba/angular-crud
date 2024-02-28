@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { selectTableCurrentPage, selectTableData, selectTableHeads, selectTableTotal } from 'src/app/shared/store/datatable/datatable.selector';
 import { Observable, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-datatable',
@@ -38,36 +39,36 @@ export class DatatableComponent implements OnInit {
       this.currentPage = current_page;
     })
   }
-  // onHandleGoToPage(page: any): void {
-  //   this.currentPage = page.pageIndex + 1;
-  //   this.eventOnGotoPage.emit(this.currentPage);
-  // }
-  // onHandleChangeLimit(e: MatSelectChange): void {
-  //   this.eventOnChangeLimit.emit(e.value);
-  // }
-  // onHandleSearch(search: any): void {
-  //   /* this.eventOnSearch.emit(search.target.value); */
-  // }
-  // onHandleSortOrder(canSort: boolean, column: string, direction: string): void {
-  //   /* if (!canSort) { return; }
-  //   this.eventOnSortOrder.emit({column, direction}); */
-  // }
-  // reloadData(): void {
-  //   /* this.isLoaded = false; */
-  // }
-  // changeFilterStatus(e: any): void {
-  //   /* this.reloadData(); */
-  // }
-  // onHandleView(data: any): void {
-  //   /* this.eventOnView.emit(data); */
-  // }
-  // onHandleEdit(data: any): void {
-  //   /* this.eventOnEdit.emit(data); */
-  // }
-  // onHandleDelete(data: any): void {
-  //   /* this.eventOnDelete.emit(data); */
-  // }
-  // onHandleDownload(data: any): void {
-  //   /* window.open(data.file_url, '_blank'); */
-  // }
+  onHandleGoToPage(page: any): void {
+    this.currentPage = page.pageIndex + 1;
+    this.eventOnGotoPage.emit(this.currentPage);
+  }
+  onHandleChangeLimit(e: MatSelectChange): void {
+    this.eventOnChangeLimit.emit(e.value);
+  }
+  onHandleSearch(search: any): void {
+    /* this.eventOnSearch.emit(search.target.value); */
+  }
+  onHandleSortOrder(canSort: boolean, column: string, direction: string): void {
+    /* if (!canSort) { return; }
+    this.eventOnSortOrder.emit({column, direction}); */
+  }
+  reloadData(): void {
+    /* this.isLoaded = false; */
+  }
+  changeFilterStatus(e: any): void {
+    /* this.reloadData(); */
+  }
+  onHandleView(data: any): void {
+    /* this.eventOnView.emit(data); */
+  }
+  onHandleEdit(data: any): void {
+    /* this.eventOnEdit.emit(data); */
+  }
+  onHandleDelete(data: any): void {
+    /* this.eventOnDelete.emit(data); */
+  }
+  onHandleDownload(data: any): void {
+    /* window.open(data.file_url, '_blank'); */
+  }
 }

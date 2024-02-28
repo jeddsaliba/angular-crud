@@ -5,7 +5,6 @@ import { getProjectListSuccess } from "./project.action";
 const _projectReducer = createReducer(
     ProjectState,
     on(getProjectListSuccess, (state, {payload}) => {
-        console.log('projectsuccess', payload)
         return {
             ...state,
             projects: payload?.result
