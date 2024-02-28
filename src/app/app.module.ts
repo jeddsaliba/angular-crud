@@ -28,6 +28,8 @@ import { environment } from 'src/environments/environment';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { ProjectEffect } from './shared/store/project/project.effect';
 import { projectReducer } from './shared/store/project/project.reducer';
+import { DataTableEffect } from './shared/store/datatable/datatable.effect';
+import { datatableReducer } from './shared/store/datatable/datatable.reducer';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { projectReducer } from './shared/store/project/project.reducer';
     NgxEditorModule,
     StoreModule.forRoot({
       user: userReducer,
-      project: projectReducer
+      project: projectReducer,
+      datatable: datatableReducer
     }),
     !environment.production
             ? StoreDevtoolsModule.instrument({
@@ -64,7 +67,8 @@ import { projectReducer } from './shared/store/project/project.reducer';
     EffectsModule.forRoot([
       UserEffect,
       ProjectEffect,
-      DialogEffect
+      DialogEffect,
+      DataTableEffect
     ])
   ],
   providers: [

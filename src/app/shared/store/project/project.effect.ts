@@ -7,6 +7,8 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { ProjectService } from 'src/app/services/project/project.service';
 import { ProjectType } from './project.type';
+import { setDataTable } from '../datatable/datatable.action';
+import { ProjectTableHeads } from './project.state';
 
 @Injectable()
 export class ProjectEffect {
@@ -21,8 +23,15 @@ export class ProjectEffect {
       ofType(ProjectType.LIST),
       switchMap(({ payload }) => {
         return this.projectService.list(payload).pipe(
-          map((result) => {
-            return getProjectListSuccess(result);
+          map((data) => {
+            const { result } = data;
+            this.store.dispatch(setDataTable({...result, table_heads: ProjectTableHeads}));
+            /* this.store.dispatch(setTableData(result.data));
+            this.store.dispatch(setTableCurrentPage(result.current_page));
+            this.store.dispatch(setTableLastPage(result.last_page));
+            this.store.dispatch(setTableTotal(result.total));
+            this.store.dispatch(setTableHeads(ProjectTableHeads)) */
+            return getProjectListSuccess(data);
           }),
           takeUntil(this.actions$.pipe(ofType(ProjectType.LIST_CANCEL))),
           catchError(({ error }) => of(notificationErrorDialog(error?.message)))

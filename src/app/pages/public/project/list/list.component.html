@@ -4,4 +4,8 @@
             <xng-breadcrumb></xng-breadcrumb>
         </div>
     </div>
+    <app-datatable
+        (eventOnGotoPage)="onGoToPage($event)"
+        (eventOnChangeLimit)="onChangeLimit($event)"
+    ></app-datatable>
 </section>

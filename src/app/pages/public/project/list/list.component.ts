@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getProjectList } from 'src/app/shared/store/project/project.action';
-import { selectProjects } from 'src/app/shared/store/project/project.selector';
 
 @Component({
   selector: 'app-list',
@@ -12,15 +11,23 @@ export class ListComponent implements OnInit {
 
   params: any = {
     page: 1,
-    limit: 5
+    limit: 10
   };
   constructor(
     private store: Store
   ) {}
   ngOnInit(): void {
+    this.getList();
+  }
+  getList() {
     this.store.dispatch(getProjectList(this.params));
-    this.store.select(selectProjects).subscribe((res) => {
-      console.log("res", res);
-    });
+  }
+  onGoToPage(page: any): void {
+    this.params = {...this.params, page};
+    this.getList();
+  }
+  onChangeLimit(limit: number): void {
+    this.params = {...this.params, limit};
+    this.getList();
   }
 }
