@@ -17,12 +17,17 @@ import { TemplateComponent } from './template/template.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { userReducer } from './shared/store/user/user.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffect } from './shared/store/user/user.effect';
 import { DialogEffect } from './shared/store/dialog/dialog.effect';
 import { DashboardComponent } from './pages/public/dashboard/dashboard.component';
 import { ToolbarComponent } from './template/toolbar/toolbar.component';
+import { environment } from 'src/environments/environment';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { ProjectEffect } from './shared/store/project/project.effect';
+import { projectReducer } from './shared/store/project/project.reducer';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,8 @@ import { ToolbarComponent } from './template/toolbar/toolbar.component';
     ButtonComponent,
     TableComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,9 +51,19 @@ import { ToolbarComponent } from './template/toolbar/toolbar.component';
     ReactiveFormsModule,
     BreadcrumbModule,
     NgxEditorModule,
-    StoreModule.forRoot({user: userReducer}),
+    StoreModule.forRoot({
+      user: userReducer,
+      project: projectReducer
+    }),
+    !environment.production
+            ? StoreDevtoolsModule.instrument({
+                maxAge: 25, // Retains last 25 states
+                logOnly: environment.production, // Restrict extension to log-only mode
+            })
+            : [],
     EffectsModule.forRoot([
       UserEffect,
+      ProjectEffect,
       DialogEffect
     ])
   ],

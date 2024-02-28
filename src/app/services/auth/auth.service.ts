@@ -10,7 +10,7 @@ export class AuthService {
 
   constructor(private rest: RestService) { }
 
-  login(payload: {email: String, password: String}): Observable<any> {
+  login(payload: {email: string, password: string}): Observable<any> {
     return this.rest.post(urls.login, payload);
   }
   logout(): Observable<any> {

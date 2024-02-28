@@ -14,6 +14,15 @@ const routes: Routes = [
     },
     children: [
       {
+        path: 'profile',
+        component: CreateUpdateComponent,
+        data: {
+          breadcrumb: {
+            label: 'Profile'
+          }
+        }
+      },
+      {
         path: 'create',
         component: CreateUpdateComponent,
         data: {

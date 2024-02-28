@@ -1,13 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
-import { login, loginSuccess } from './user.action';
+import { loginSuccess } from './user.action';
 import { UserState } from './user.state';
 const _userReducer = createReducer(
   UserState,
   on(loginSuccess, (state, action) => {
+    console.log(action);
     return {
-      ...state,
-      access_token: action.payload.access_token,
-      user: action.payload.user
+      ...state
     };
   })
 );

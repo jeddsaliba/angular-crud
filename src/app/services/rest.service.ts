@@ -24,6 +24,10 @@ export class RestService {
     return { headers: requestHeaders };
   }
 
+  restEndpointParams(params: any) {
+    return new URLSearchParams(params).toString();
+  }
+
   restEndpoint(endpoint: string): string {
     return `${this.url}/${endpoint}`;
   }

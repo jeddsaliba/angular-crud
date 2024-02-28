@@ -1,8 +1,12 @@
 export interface UserModel {
     id: number,
-    name: String,
-    email: String
+    name: string,
+    email: string
 }
 export interface User {
     user: UserModel
-};
+}
+export interface LoginPayload {
+    email: string,
+    password: string
+}

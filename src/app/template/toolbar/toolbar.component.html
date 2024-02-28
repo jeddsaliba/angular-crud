@@ -3,7 +3,7 @@
     <span class="spacer"></span>
     <button mat-button [matMenuTriggerFor]="menu">
         <mat-icon class="mr-16">face</mat-icon>
-        <span>{{ user$?.name }}</span>
+        <span>{{ user?.name }}</span>
     </button>
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="onHandleGoToProfile()">
