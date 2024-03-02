@@ -1,20 +1,34 @@
 <div class="row">
     <div class="col-12">
-        <mat-card>
-            <ng-container *ngIf="tableData$ | async">
+        <mat-card class="pt-16 pr-16 pl-16">
+            <div class="row">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <mat-form-field>
+                            <mat-label>Search</mat-label>
+                            <input matInput type="text" placeholder="Search" (keydown.enter)="onSearch($event)">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-raised-button (click)="onCreateUpdate()" color="primary">Create</button>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="(tableData$ | async) as tableData">
                 <div class="data-table table-listing" style="overflow: auto;">
                     <table>
                         <thead>
                             <tr>
                                 <ng-container *ngFor="let th of (tableHeads$ | async); let i = index">
-                                    <th [ngClass]="{ 'sort' : th.canSort }" (click)="onHandleSortOrder(th.canSort, th.key, order.direction === 'desc' ? 'asc' : 'desc')">
+                                    <th [ngClass]="{ 'sort' : th.canSort }" (click)="onSort(th.canSort, th.key, params.direction === 'desc' ? 'asc' : 'desc')">
                                         <div class="d-flex justify-content-between">
                                             <span>{{ th.label }}</span>
                                             <ng-container *ngIf="th.canSort">
-                                                <mat-icon *ngIf="order.column !== th.key">import_export</mat-icon>
-                                                <ng-container *ngIf="order.column === th.key">
-                                                    <mat-icon *ngIf="order.direction === 'asc'" class="fs-16 lh-16 w-16 h-16">north</mat-icon>
-                                                    <mat-icon *ngIf="order.direction === 'desc'" class="fs-16 lh-16 w-16 h-16">south</mat-icon>
+                                                <mat-icon *ngIf="params.sort !== th.key">import_export</mat-icon>
+                                                <ng-container *ngIf="params.sort === th.key">
+                                                    <mat-icon *ngIf="params.direction === 'asc'" class="fs-16 lh-16 w-16 h-16">north</mat-icon>
+                                                    <mat-icon *ngIf="params.direction === 'desc'" class="fs-16 lh-16 w-16 h-16">south</mat-icon>
                                                 </ng-container>
                                             </ng-container>
                                         </div>
@@ -23,7 +37,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of (tableData$ | async); let i = index">
+                            <ng-container *ngIf="tableData.length === 0">
+                                <tr>
+                                    <td [attr.colspan]="(tableHeads$ | async).length" class="text-center">{{ tableMessage$ | async }}</td>
+                                </tr>
+                            </ng-container>
+                            <tr *ngFor="let item of tableData; let i = index">
                                 <ng-container *ngFor="let th of (tableHeads$ | async)">
                                     <td *ngIf="item[th.parentObject]">
                                         <ng-container *ngIf="!th.pipe">
@@ -41,19 +60,19 @@
                                         </ng-container>
                                     </td>
                                     <td *ngIf="th.key === 'actions'">
-                                        <button *ngIf="th.canView" mat-icon-button (click)="onHandleView(item)" color="primary">
+                                        <button *ngIf="th.canView" mat-icon-button (click)="onView(item)" color="primary">
                                             <mat-icon>visibility</mat-icon>
                                         </button>
-                                        <button *ngIf="th.canEdit" mat-icon-button (click)="onHandleEdit(item)" color="primary">
+                                        <button *ngIf="th.canEdit" mat-icon-button (click)="onCreateUpdate(item)" color="primary">
                                             <mat-icon>edit</mat-icon>
                                         </button>
                                         <button *ngIf="th.canArchive" mat-icon-button color="accent">
                                             <mat-icon>inventory_2</mat-icon>
                                         </button>
-                                        <button *ngIf="th.canDownload" mat-icon-button color="primary" (click)="onHandleDownload(item)">
+                                        <button *ngIf="th.canDownload" mat-icon-button color="primary" (click)="onDownload(item)">
                                             <mat-icon>download</mat-icon>
                                         </button>
-                                        <button *ngIf="th.canDelete" mat-icon-button color="warn" (click)="onHandleDelete(item)">
+                                        <button *ngIf="th.canDelete" mat-icon-button color="warn" (click)="onDelete(item)">
                                             <mat-icon>delete</mat-icon>
                                         </button>
                                     </td>
@@ -63,14 +82,14 @@
                         <tfoot>
                             <tr>
                                 <ng-container *ngFor="let th of (tableHeads$ | async); let i = index">
-                                    <th [ngClass]="{ 'sort' : th.canSort }" (click)="onHandleSortOrder(th.canSort, th.key, order.direction === 'desc' ? 'asc' : 'desc')">
+                                    <th [ngClass]="{ 'sort' : th.canSort }" (click)="onSort(th.canSort, th.key, params.direction === 'desc' ? 'asc' : 'desc')">
                                         <div class="d-flex justify-content-between">
                                             <span>{{ th.label }}</span>
                                             <ng-container *ngIf="th.canSort">
-                                                <mat-icon *ngIf="order.column !== th.key">import_export</mat-icon>
-                                                <ng-container *ngIf="order.column === th.key">
-                                                    <mat-icon *ngIf="order.direction === 'asc'" class="fs-16 lh-16 w-16 h-16">north</mat-icon>
-                                                    <mat-icon *ngIf="order.direction === 'desc'" class="fs-16 lh-16 w-16 h-16">south</mat-icon>
+                                                <mat-icon *ngIf="params.sort !== th.key">import_export</mat-icon>
+                                                <ng-container *ngIf="params.sort === th.key">
+                                                    <mat-icon *ngIf="params.direction === 'asc'" class="fs-16 lh-16 w-16 h-16">north</mat-icon>
+                                                    <mat-icon *ngIf="params.direction === 'desc'" class="fs-16 lh-16 w-16 h-16">south</mat-icon>
                                                 </ng-container>
                                             </ng-container>
                                         </div>
@@ -80,27 +99,14 @@
                         </tfoot>
                     </table>
                 </div>
-                <div class="row mt-16">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <label class="mr-16 ml-16" htmlFor="show">Show</label>
-                            <mat-form-field>
-                                <mat-select [formControl]="limit" (selectionChange)="onHandleChangeLimit($event)" [disabled]="total < 10">
-                                    <mat-option *ngFor="let limit of limits" [value]="limit.value">{{ limit.label }}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <label class="ml-16" htmlFor="total">of {{ total | number }} entries</label>
-                        </div>
-                        <mat-paginator
-                            [length]="total"
-                            [pageSize]="limit.value"
-                            [hidePageSize]="true"
-                            [showFirstLastButtons]="true"
-                            (page)="onHandleGoToPage($event)"
-                            [pageIndex]="currentPage - 1"
-                            >
-                        </mat-paginator>
-                    </div>
+                <div class="row mt-16 mb-16">
+                    <mat-paginator
+                        [length]="total"
+                        [showFirstLastButtons]="true"
+                        [pageSizeOptions]="limitOptions"
+                        (page)="onGoToPage($event)"
+                        [pageIndex]="currentPage - 1"
+                    ></mat-paginator>
                 </div>
             </ng-container>
         </mat-card>

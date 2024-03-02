@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { LimitOptionsModel, limitOptions } from './limit/limit';
 import { Store } from '@ngrx/store';
-import { selectTableCurrentPage, selectTableData, selectTableHeads, selectTableTotal } from 'src/app/shared/store/datatable/datatable.selector';
+import { selectTableCurrentPage, selectTableData, selectTableHeads, selectTableMessage, selectTableParams, selectTableTotal } from 'src/app/shared/store/datatable/datatable.selector';
 import { Observable, of } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
@@ -12,19 +11,26 @@ import { MatSelectChange } from '@angular/material/select';
 })
 export class DatatableComponent implements OnInit {
 
-  limits: LimitOptionsModel[] = limitOptions;
+  limitOptions: number[] = [10, 25, 50, 100];
   tableData$: Observable<any> = of([]);
   tableHeads$: Observable<any> = of([]);
+  tableMessage$: Observable<string> = of('');
   total = 0;
   currentPage = 1;
   order: any = {
     column: 'id',
     direction: 'desc'
   };
+  params: any;
   limit = new FormControl(10);
   @Output() eventOnGotoPage: EventEmitter<any> = new EventEmitter();
   @Output() eventOnChangeLimit: EventEmitter<any> = new EventEmitter();
-
+  @Output() eventOnSearch: EventEmitter<string> = new EventEmitter();
+  @Output() eventOnSort: EventEmitter<any> = new EventEmitter();
+  @Output() eventOnCreateUpdate: EventEmitter<any> = new EventEmitter();
+  @Output() eventOnView: EventEmitter<any> = new EventEmitter();
+  @Output() eventOnEdit: EventEmitter<any> = new EventEmitter();
+  @Output() eventOnDelete: EventEmitter<any> = new EventEmitter();
   constructor(
     private store: Store
   ) { }
@@ -32,43 +38,43 @@ export class DatatableComponent implements OnInit {
   ngOnInit(): void {
     this.tableHeads$ = this.store.select(selectTableHeads);
     this.tableData$ = this.store.select(selectTableData);
+    this.tableMessage$ = this.store.select(selectTableMessage);
     this.store.select(selectTableTotal).subscribe((total: number) => {
       this.total = total;
     });
     this.store.select(selectTableCurrentPage).subscribe((current_page: number) => {
       this.currentPage = current_page;
-    })
+    });
+    console.log("hey");
+    this.store.select(selectTableParams).subscribe((params: any) => {
+      this.params = params;
+      console.log("params", this.params);
+    });
   }
-  onHandleGoToPage(page: any): void {
+  onCreateUpdate(data?: any | null): void {
+    this.eventOnCreateUpdate.emit(data);
+  }
+  onGoToPage(page: any): void {
     this.currentPage = page.pageIndex + 1;
     this.eventOnGotoPage.emit(this.currentPage);
   }
-  onHandleChangeLimit(e: MatSelectChange): void {
+  onChangeLimit(e: MatSelectChange): void {
     this.eventOnChangeLimit.emit(e.value);
   }
-  onHandleSearch(search: any): void {
-    /* this.eventOnSearch.emit(search.target.value); */
+  onSearch(search: any): void {
+    this.eventOnSearch.emit(search.target.value);
   }
-  onHandleSortOrder(canSort: boolean, column: string, direction: string): void {
-    /* if (!canSort) { return; }
-    this.eventOnSortOrder.emit({column, direction}); */
+  onSort(canSort: boolean, sort: string, direction: string): void {
+    if (!canSort) { return; }
+    this.eventOnSort.emit({sort, direction});
   }
-  reloadData(): void {
-    /* this.isLoaded = false; */
+  onView(data: any): void {
+    this.eventOnView.emit(data);
   }
-  changeFilterStatus(e: any): void {
-    /* this.reloadData(); */
+  onEdit(data: any): void {
+    this.eventOnEdit.emit(data);
   }
-  onHandleView(data: any): void {
-    /* this.eventOnView.emit(data); */
-  }
-  onHandleEdit(data: any): void {
-    /* this.eventOnEdit.emit(data); */
-  }
-  onHandleDelete(data: any): void {
-    /* this.eventOnDelete.emit(data); */
-  }
-  onHandleDownload(data: any): void {
-    /* window.open(data.file_url, '_blank'); */
+  onDelete(data: any): void {
+    this.eventOnDelete.emit(data);
   }
 }

@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   initForm(): void {
     this.loginForm = this.formBuilder.group({
       email: [
-        'sophie.renner@example.net',
+        'maya.vonrueden@example.org',
         Validators.compose([
           Validators.required,
           Validators.minLength(8),

@@ -25,6 +25,7 @@
     "@ngrx/store": "^16.3.0",
     "@ngrx/store-devtools": "^16.3.0",
     "bootstrap": "^5.3.3",
+    "hashids": "^2.3.0",
     "ngx-editor": "^16.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

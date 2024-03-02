@@ -5,5 +5,7 @@ export const DataTableInitialState: DataTableModel = {
     data: [],
     last_page: 0,
     total: 0,
-    table_heads: []
+    table_heads: [],
+    params: {},
+    message: ''
 }

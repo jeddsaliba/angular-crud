@@ -3,5 +3,7 @@ export interface DataTableModel {
     data: any[],
     last_page: number,
     total: number,
-    table_heads: string[]
+    table_heads: string[],
+    params: any,
+    message: string
 }

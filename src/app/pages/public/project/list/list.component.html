@@ -1,5 +1,5 @@
 <section class="p-16">
-    <div class="row">
+    <div class="row mb-16">
         <div class="col-12">
             <xng-breadcrumb></xng-breadcrumb>
         </div>
@@ -7,5 +7,9 @@
     <app-datatable
         (eventOnGotoPage)="onGoToPage($event)"
         (eventOnChangeLimit)="onChangeLimit($event)"
+        (eventOnSort)="onSort($event)"
+        (eventOnSearch)="onSearch($event)"
+        (eventOnCreateUpdate)="onCreateUpdate($event)"
+        (eventOnView)="onView($event)"
     ></app-datatable>
 </section>

@@ -1,5 +1,7 @@
 export const urls = {
   login: 'auth/login',
   logout: 'auth/logout',
-  project_list: 'project/list'
+  project: 'project/view',
+  project_list: 'project/list',
+  user_list: 'user/list'
 };

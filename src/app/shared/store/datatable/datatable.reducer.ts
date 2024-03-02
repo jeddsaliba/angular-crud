@@ -11,7 +11,9 @@ const _datatableReducer = createReducer(
             current_page: payload.current_page,
             last_page: payload.last_page,
             total: payload.total,
-            table_heads: payload.table_heads
+            table_heads: payload.table_heads,
+            params: payload.params,
+            message: payload.message
         }
     })
 )

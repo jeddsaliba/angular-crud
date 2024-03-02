@@ -7,3 +7,5 @@ export const selectTableCurrentPage = createSelector(datatableState, (state: Dat
 export const selectTableLastPage = createSelector(datatableState, (state: DataTableModel) => state.last_page);
 export const selectTableTotal = createSelector(datatableState, (state: DataTableModel) => state.total);
 export const selectTableHeads = createSelector(datatableState, (state: DataTableModel) => state.table_heads);
+export const selectTableParams = createSelector(datatableState, (state: DataTableModel) => state.params);
+export const selectTableMessage = createSelector(datatableState, (state: DataTableModel) => state.message);

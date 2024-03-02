@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { ProjectState } from "./project.state";
-import { getProjectListSuccess } from "./project.action";
+import { getProjectDetailsSuccess, getProjectListSuccess } from "./project.action";
 
 const _projectReducer = createReducer(
     ProjectState,
@@ -8,6 +8,12 @@ const _projectReducer = createReducer(
         return {
             ...state,
             projects: payload?.result
+        }
+    }),
+    on(getProjectDetailsSuccess, (state, {payload}) => {
+        return {
+            ...state,
+            project: payload?.result
         }
     })
 )

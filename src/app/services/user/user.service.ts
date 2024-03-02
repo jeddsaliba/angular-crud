@@ -6,15 +6,11 @@ import { urls } from 'src/app/lib/urls/urls';
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectService {
+export class UserService {
 
   constructor(private rest: RestService) { }
 
   list(params: any): Observable<any> {
-    return this.rest.get(`${urls.project_list}?${this.rest.restEndpointParams(params)}`)
-  }
-  details(id: string): Observable<any> {
-    console.log("id", id);
-    return this.rest.get(`${urls.project}/${id}`)
+    return this.rest.get(`${urls.user_list}?${this.rest.restEndpointParams(params)}`)
   }
 }

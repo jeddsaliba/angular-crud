@@ -7,9 +7,9 @@ export enum UserType {
     USER_DETAILS_SUCCESS = '[USER API] User Details Success',
     USER_DETAILS_CANCEL = '[USER API] User Details Cancel',
 
-    USER_LIST = '[USER API] User List',
-    USER_LIST_SUCCESS = '[USER API] User List Success',
-    USER_LIST_CANCEL = '[USER API] User List Cancel',
+    LIST = '[USER API] List',
+    LIST_SUCCESS = '[USER API] List Success',
+    LIST_CANCEL = '[USER API] List Cancel',
 
     LOGOUT = '[AUTH API] Logout',
     LOGOUT_SUCCESS = '[AUTH API] Logout Success',

@@ -4,3 +4,4 @@ import { User } from "./user.model";
 const userState = createFeatureSelector<User>('user');
 
 export const selectUser = createSelector(userState, (state: User) => state.user);
+export const selectUsers = createSelector(userState, (state: User) => state.users);

@@ -1,0 +1,14 @@
+<section class="p-16">
+    <div class="row mb-16">
+        <div class="col-12">
+            <xng-breadcrumb></xng-breadcrumb>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <ng-container *ngIf="(details$ | async) as details">
+                <p>{{ details.name }}</p>
+            </ng-container>
+        </div>
+    </div>
+</section>

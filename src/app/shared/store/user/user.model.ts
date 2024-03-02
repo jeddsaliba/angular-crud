@@ -3,10 +3,13 @@ export interface UserModel {
     name: string,
     email: string
 }
-export interface User {
-    user: UserModel
+export interface UsersModel {
+    current_page: number,
+    data: UserModel[],
+    last_page: number,
+    total: number
 }
-export interface LoginPayload {
-    email: string,
-    password: string
+export interface User {
+    user: UserModel,
+    users: UsersModel
 }
