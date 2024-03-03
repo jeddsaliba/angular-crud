@@ -12,6 +12,7 @@ export interface ProjectsModel {
     last_page: number,
     total: number
 }
+
 export interface Project {
     project: ProjectModel,
     projects: ProjectsModel

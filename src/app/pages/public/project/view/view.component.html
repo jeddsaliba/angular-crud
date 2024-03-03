@@ -4,11 +4,45 @@
             <xng-breadcrumb></xng-breadcrumb>
         </div>
     </div>
-    <div class="row">
+    <div class="row mb-16">
         <div class="col-12">
-            <ng-container *ngIf="(details$ | async) as details">
-                <p>{{ details.name }}</p>
-            </ng-container>
+            <mat-card class="p-16">
+                <ng-container *ngIf="(details$ | async) as details">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Project Details</h2>
+                        </div>
+                    </div>
+                    <form [formGroup]="projectForm">
+                        <div class="row">
+                            <div class="col-6">
+                                <app-input
+                                    [formGroup]="projectForm"
+                                    [type]="'text'"
+                                    [controlName]="'name'"
+                                    [fieldName]="'Project Name'"
+                                    [placeholder]="'Enter project name'"
+                                    [required]="true"
+                                ></app-input>
+                            </div>
+                            <div class="col-6">
+                                <app-input
+                                    [formGroup]="projectForm"
+                                    [type]="'text'"
+                                    [controlName]="'created_by_name'"
+                                    [fieldName]="'Created By'"
+                                    [placeholder]="'Enter created_by'"
+                                    [required]="true"
+                                ></app-input>
+                            </div>
+                            <div class="col-12">
+                                
+                            </div>
+                        </div>
+                    </form>
+                </ng-container>
+            </mat-card>
         </div>
     </div>
+    <app-task-list [id]="id"></app-task-list>
 </section>

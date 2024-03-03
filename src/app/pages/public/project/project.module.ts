@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatatableModule } from 'src/app/components/datatable/datatable.module';
 import { ViewComponent } from './view/view.component';
 import { ProjectComponent } from './project.component';
+import { InputModule } from 'src/app/components/form/input/input.module';
+import { TaskModule } from './task/task.module';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { ProjectComponent } from './project.component';
     ReactiveFormsModule,
     FormsModule,
     MaterialThemeModule,
-    DatatableModule
+    DatatableModule,
+    TaskModule,
+    InputModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

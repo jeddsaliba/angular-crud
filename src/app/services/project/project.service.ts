@@ -11,10 +11,9 @@ export class ProjectService {
   constructor(private rest: RestService) { }
 
   list(params: any): Observable<any> {
-    return this.rest.get(`${urls.project_list}?${this.rest.restEndpointParams(params)}`)
+    return this.rest.get(`${urls.project}/${urls.list}?${this.rest.restEndpointParams(params)}`)
   }
   details(id: string): Observable<any> {
-    console.log("id", id);
-    return this.rest.get(`${urls.project}/${id}`)
+    return this.rest.get(`${urls.project}/${urls.view}/${id}`)
   }
 }

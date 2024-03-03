@@ -33,7 +33,6 @@ export const ProjectTableHeads: any = [
     showActions: true,
   },
 ];
-
 const ProjectInitialState: ProjectModel = {
   id: 0,
   name: '',
@@ -50,5 +49,5 @@ const ProjectsInitialState: ProjectsModel = {
 
 export const ProjectState: Project = {
   project: ProjectInitialState,
-  projects: ProjectsInitialState,
+  projects: ProjectsInitialState
 };

@@ -8,6 +8,7 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialThemeModule } from 'src/app/material-theme/material-theme.module';
 import { DatatableModule } from 'src/app/components/datatable/datatable.module';
+import { InputModule } from 'src/app/components/form/input/input.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { DatatableModule } from 'src/app/components/datatable/datatable.module';
     ReactiveFormsModule,
     FormsModule,
     MaterialThemeModule,
-    DatatableModule
+    DatatableModule,
+    InputModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

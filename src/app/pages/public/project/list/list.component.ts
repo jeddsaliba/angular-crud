@@ -45,7 +45,12 @@ export class ListComponent implements OnInit {
     this.getList();
   }
   onCreateUpdate(data?: ProjectModel | null) {
-    data ? this.router.navigate(['project', btoa(data.id.toString()), 'update']) : this.router.navigate(['project/create']);
+    if (data) {
+      const encryptedID = this.authService.encrypt(data.id.toString());
+      this.router.navigate(['project', encryptedID, 'update']);
+      return;
+    }
+    this.router.navigate(['project/create']);
   }
   onView(data: ProjectModel) {
     const encryptedID = this.authService.encrypt(data.id.toString());

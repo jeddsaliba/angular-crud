@@ -11,6 +11,6 @@ export class UserService {
   constructor(private rest: RestService) { }
 
   list(params: any): Observable<any> {
-    return this.rest.get(`${urls.user_list}?${this.rest.restEndpointParams(params)}`)
+    return this.rest.get(`${urls.user}/${urls.list}?${this.rest.restEndpointParams(params)}`)
   }
 }

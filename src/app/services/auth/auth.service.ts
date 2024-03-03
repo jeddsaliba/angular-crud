@@ -13,17 +13,16 @@ export class AuthService {
   constructor(private rest: RestService) { }
 
   login(payload: {email: string, password: string}): Observable<any> {
-    return this.rest.post(urls.login, payload);
+    return this.rest.post(`${urls.auth}/${urls.login}`, payload);
   }
   logout(): Observable<any> {
-    return this.rest.post(urls.logout, null);
+    return this.rest.post(`${urls.auth}/${urls.logout}`, null);
   }
   encrypt(value: string) {
-    const hashKey = new HashID(environment.hashKeys.salt, environment.hashKeys.keyLength, environment.hashKeys.secretKey);
     try {
+      const hashKey = new HashID(environment.hashKeys.salt, environment.hashKeys.keyLength, environment.hashKeys.secretKey);
       return hashKey.encode(value);
     } catch (error) {
-      console.log("err", error);
       return value;
     }
   }

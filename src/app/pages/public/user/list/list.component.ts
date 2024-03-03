@@ -38,7 +38,6 @@ export class ListComponent implements OnInit {
     this.getList();
   }
   onSearch(q: string): void {
-    console.log(q);
     this.params = {...this.params, q};
     this.getList();
   }

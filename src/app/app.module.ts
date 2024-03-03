@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InputComponent } from './components/form/input/input.component';
 import { ButtonComponent } from './components/form/button/button.component';
 import { TableComponent } from './components/table/table.component';
 import { MaterialThemeModule } from './material-theme/material-theme.module';
@@ -30,13 +29,15 @@ import { ProjectEffect } from './shared/store/project/project.effect';
 import { projectReducer } from './shared/store/project/project.reducer';
 import { DataTableEffect } from './shared/store/datatable/datatable.effect';
 import { datatableReducer } from './shared/store/datatable/datatable.reducer';
+import { projectTaskReducer } from './shared/store/task/task.reducer';
+import { ProjectTaskEffect } from './shared/store/task/task.effect';
+import { InputModule } from './components/form/input/input.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     TemplateComponent,
-    InputComponent,
     ButtonComponent,
     TableComponent,
     LoginComponent,
@@ -53,10 +54,12 @@ import { datatableReducer } from './shared/store/datatable/datatable.reducer';
     ReactiveFormsModule,
     BreadcrumbModule,
     NgxEditorModule,
+    InputModule,
     StoreModule.forRoot({
       user: userReducer,
       project: projectReducer,
-      datatable: datatableReducer
+      datatable: datatableReducer,
+      task: projectTaskReducer
     }),
     !environment.production
             ? StoreDevtoolsModule.instrument({
@@ -67,6 +70,7 @@ import { datatableReducer } from './shared/store/datatable/datatable.reducer';
     EffectsModule.forRoot([
       UserEffect,
       ProjectEffect,
+      ProjectTaskEffect,
       DialogEffect,
       DataTableEffect
     ])

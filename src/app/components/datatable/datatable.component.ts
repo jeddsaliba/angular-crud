@@ -45,10 +45,8 @@ export class DatatableComponent implements OnInit {
     this.store.select(selectTableCurrentPage).subscribe((current_page: number) => {
       this.currentPage = current_page;
     });
-    console.log("hey");
     this.store.select(selectTableParams).subscribe((params: any) => {
       this.params = params;
-      console.log("params", this.params);
     });
   }
   onCreateUpdate(data?: any | null): void {
@@ -76,5 +74,8 @@ export class DatatableComponent implements OnInit {
   }
   onDelete(data: any): void {
     this.eventOnDelete.emit(data);
+  }
+  onDownload(data: any): void {
+    console.log(data);
   }
 }
