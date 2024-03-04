@@ -1,1 +1,83 @@
-<p>create-update works!</p>
+<section class="p-16">
+    <div class="row mb-16">
+        <div class="col-12">
+            <xng-breadcrumb></xng-breadcrumb>
+        </div>
+    </div>
+    <div class="row mb-16">
+        <div class="col-12">
+            <mat-card class="p-16">
+                <ng-container *ngIf="taskForm">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Project Task Details</h2>
+                        </div>
+                    </div>
+                    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-6">
+                                <app-input
+                                    [formGroup]="taskForm"
+                                    [type]="'text'"
+                                    [controlName]="'name'"
+                                    [fieldName]="'Project Task Name'"
+                                    [placeholder]="'Enter project task name'"
+                                    [required]="true"
+                                ></app-input>
+                            </div>
+                            <div class="col-6">
+                                <app-select
+                                    [formGroup]="taskForm"
+                                    [options]="userOptions"
+                                    [controlName]="'assigned_to'"
+                                    [fieldName]="'Assigned To'"
+                                    [placeholder]="'Choose a user'"
+                                    [required]="true"
+                                ></app-select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <app-quill-editor
+                                    [formGroup]="taskForm"
+                                    [type]="'text'"
+                                    [controlName]="'description'"
+                                    [fieldName]="'Project Task Description'"
+                                    [placeholder]="'Enter project task description'"
+                                    [required]="true"
+                                ></app-quill-editor>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-6">
+                                <app-date-picker
+                                    [formGroup]="taskForm"
+                                    [controlName]="'start_date'"
+                                    [fieldName]="'Project Task Start Date'"
+                                    [placeholder]="'Enter project task start date'"
+                                    [required]="true"
+                                ></app-date-picker>
+                            </div>
+                            <div class="col-6">
+                                <app-date-picker
+                                    [formGroup]="taskForm"
+                                    [controlName]="'end_date'"
+                                    [fieldName]="'Project Task End Date'"
+                                    [placeholder]="'Enter project task end date'"
+                                    [required]="true"
+                                ></app-date-picker>
+                            </div>
+                        </div> -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-end">
+                                    <button mat-raised-button color="primary" [disabled]="!taskForm.valid">{{ id ? 'Update' : 'Create' }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </ng-container>
+            </mat-card>
+        </div>
+    </div>
+</section>

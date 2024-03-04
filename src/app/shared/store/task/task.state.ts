@@ -52,8 +52,10 @@ const ProjectTaskInitialState: ProjectTaskModel = {
   created_at: '',
   start_date: '',
   end_date: '',
+  assigned_to: 0,
   assigned_to_name: '',
-  project_id: 0
+  project_id: 0,
+  status: ''
 };
 const ProjectTasksInitialState: ProjectTasksModel = {
   current_page: 0,

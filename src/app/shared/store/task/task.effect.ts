@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, takeUntil } from 'rxjs';
+import { catchError, map, of, switchMap, takeUntil, tap } from 'rxjs';
 import { notificationErrorDialog, notificationSuccessDialog } from '../dialog/dialog.action';
 import { Store } from '@ngrx/store';
 import { ProjectTaskType } from './task.type';
@@ -9,6 +9,7 @@ import { ProjectTaskTableHeads } from './task.state';
 import { ProjectTask } from './task.model';
 import { TaskService } from 'src/app/services/task/task.service';
 import { deleteProjectTaskDeleteSuccess, getProjectTaskDetailsSuccess, getProjectTaskList, getProjectTaskListSuccess, postProjectTaskCreateSuccess, putProjectTaskUpdateSuccess } from './task.action';
+import { Location } from '@angular/common';
 
 @Injectable()
 export class ProjectTaskEffect {
@@ -21,7 +22,8 @@ export class ProjectTaskEffect {
   constructor(
     private taskService: TaskService,
     private actions$: Actions,
-    private store: Store<ProjectTask>
+    private store: Store<ProjectTask>,
+    private location: Location
   ) {}
   _getProjectTaskList = createEffect(() => {
     return this.actions$.pipe(
@@ -85,7 +87,11 @@ export class ProjectTaskEffect {
         const { project_id, id, data } = payload;
         return this.taskService.update(project_id, id, data).pipe(
           map((data) => {
+            this.store.dispatch(notificationSuccessDialog(data.message));
             return putProjectTaskUpdateSuccess(data);
+          }),
+          tap(() => {
+            this.location.back();
           }),
           takeUntil(this.actions$.pipe(ofType(ProjectTaskType.UPDATE_CANCEL))),
           catchError(({ error }) => of(notificationErrorDialog(error?.message)))

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { getProjectDetails } from 'src/app/shared/store/project/project.action';
@@ -16,7 +16,7 @@ export class ViewComponent implements OnInit {
   projectForm: FormGroup | any;
   details$: Observable<ProjectModel> = of();
   id?: string;
-  constructor(private route: ActivatedRoute, private store: Store, protected formBuilder: FormBuilder) {}
+  constructor(public route: ActivatedRoute, private store: Store, protected formBuilder: FormBuilder, private router: Router) {}
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       this.id = params.id;

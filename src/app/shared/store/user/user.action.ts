@@ -12,6 +12,6 @@ export const logoutSuccess = createAction(UserType.LOGOUT_SUCCESS, (payload: any
 }));
 export const logoutancel = createAction(UserType.LOGOUT_CANCEL);
 
-export const getUserList = createAction(UserType.LIST, (payload: any) => ({payload}));
+export const getUserList = createAction(UserType.LIST, (payload?: any) => ({payload}));
 export const getUserListSuccess = createAction(UserType.LIST_SUCCESS, (payload: any) => ({payload}));
 export const getUserListCancel = createAction(UserType.LIST_CANCEL);

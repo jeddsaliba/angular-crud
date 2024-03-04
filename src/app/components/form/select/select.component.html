@@ -2,13 +2,15 @@
     <div class="row">
         <mat-form-field class="col-12">
             <mat-label>{{ fieldName }}</mat-label>
-            <input matInput
-                [type]="type"
-                [placeholder]="placeholder"
-                [formControlName]="controlName"
-                [required]="required"
-            >
-            <mat-icon matSuffix *ngIf="isPercent">percent</mat-icon>
+            <mat-select [formControlName]="controlName" [multiple]="multiple">
+              <!-- <mat-select-trigger>
+                {{ controlName.value?.[0] || ''}}
+                <span *ngIf="( controlName.value?.length || 0) > 1" class="example-additional-selection">
+                  (+{{( controlName.value?.length || 0) - 1 }} {{ controlName.value?.length === 2 ? 'other' : 'others' }})
+                </span>
+              </mat-select-trigger> -->
+              <mat-option *ngFor="let option of options" [value]="option.value">{{ option.label }}</mat-option>
+            </mat-select>
             <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
             <mat-error *ngIf="formGroup.controls[controlName].touched && formGroup.controls[controlName].invalid">
                 <span *ngIf="formGroup.get(controlName).hasError('required')">{{ fieldName }} is required</span>
@@ -17,6 +19,6 @@
                 <span *ngIf="formGroup.get(controlName).hasError('min')">{{ fieldName }}'s minimum value is {{ formGroup.get(controlName)?.errors?.min?.min }}</span>
                 <span *ngIf="formGroup.get(controlName).hasError('max')">{{ fieldName }}'s maximum value is {{ formGroup.get(controlName)?.errors?.max?.max }}</span>
             </mat-error>
-        </mat-form-field>
+          </mat-form-field>
     </div>
 </form>

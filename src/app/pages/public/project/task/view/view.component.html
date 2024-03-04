@@ -1,1 +1,65 @@
-<p>view works!</p>
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content>
+    <ng-container *ngIf="taskForm">
+        <form [formGroup]="taskForm">
+            <div class="row">
+                <div class="col-6">
+                    <app-input
+                        [formGroup]="taskForm"
+                        [type]="'text'"
+                        [controlName]="'name'"
+                        [fieldName]="'Project Task Name'"
+                        [placeholder]="'Enter project task name'"
+                        [required]="true"
+                    ></app-input>
+                </div>
+                <div class="col-6">
+                    <app-input
+                        [formGroup]="taskForm"
+                        [type]="'text'"
+                        [controlName]="'assigned_to_name'"
+                        [fieldName]="'Assigned To'"
+                        [placeholder]="'Choose a user'"
+                        [required]="true"
+                    ></app-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <app-quill-editor
+                        [formGroup]="taskForm"
+                        [type]="'text'"
+                        [controlName]="'description'"
+                        [fieldName]="'Project Task Description'"
+                        [placeholder]="'Enter project task description'"
+                        [required]="true"
+                    ></app-quill-editor>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <app-date-picker
+                        [formGroup]="taskForm"
+                        [controlName]="'start_date'"
+                        [fieldName]="'Project Task Start Date'"
+                        [placeholder]="'Enter project task start date'"
+                        [required]="true"
+                    ></app-date-picker>
+                </div>
+                <div class="col-6">
+                    <app-date-picker
+                        [formGroup]="taskForm"
+                        [controlName]="'end_date'"
+                        [fieldName]="'Project Task End Date'"
+                        [placeholder]="'Enter project task end date'"
+                        [required]="true"
+                    ></app-date-picker>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>{{ data.cancelButton }}</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>{{ data.confirmButton }}</button>
+</mat-dialog-actions>

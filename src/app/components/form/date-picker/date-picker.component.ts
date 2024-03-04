@@ -2,10 +2,10 @@ import { Component, Input } from '@angular/core';
 import { AbstractControl, FormControlName, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html'
+  selector: 'app-date-picker',
+  templateUrl: './date-picker.component.html'
 })
-export class InputComponent {
+export class DatePickerComponent {
   @Input() formGroup: FormGroup | AbstractControl | any;
   @Input() type = 'text';
   @Input() required = false;
@@ -13,5 +13,4 @@ export class InputComponent {
   @Input() fieldName: string | any;
   @Input() placeholder: string | any;
   @Input() hint: string | any;
-  @Input() isPercent = false;
 }

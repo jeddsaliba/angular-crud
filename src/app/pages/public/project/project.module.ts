@@ -9,14 +9,13 @@ import { MaterialThemeModule } from 'src/app/material-theme/material-theme.modul
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatatableModule } from 'src/app/components/datatable/datatable.module';
 import { ViewComponent } from './view/view.component';
-import { ProjectComponent } from './project.component';
 import { InputModule } from 'src/app/components/form/input/input.module';
 import { TaskModule } from './task/task.module';
+import { QuillEditorModule } from 'src/app/components/form/quill-editor/quill-editor.module';
 
 
 @NgModule({
   declarations: [
-    ProjectComponent,
     ListComponent,
     CreateUpdateComponent,
     ViewComponent
@@ -29,8 +28,9 @@ import { TaskModule } from './task/task.module';
     FormsModule,
     MaterialThemeModule,
     DatatableModule,
+    InputModule,
     TaskModule,
-    InputModule
+    QuillEditorModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

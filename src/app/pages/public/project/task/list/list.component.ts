@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { deleteProjectTaskDelete, getProjectTaskList } from 'src/app/shared/store/task/task.action';
 import { ProjectTaskModel } from 'src/app/shared/store/task/task.model';
-import { CreateUpdateComponent } from '../create-update/create-update.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/components/dialog/dialog.component';
+import { ViewComponent } from './../view/view.component';
 
 @Component({
   selector: 'app-task-list',
@@ -53,25 +53,28 @@ export class ListComponent implements OnInit {
     this.getList();
   }
   onCreateUpdate(data?: ProjectTaskModel | null) {
-    data ? this.router.navigate(['project', btoa(data.id.toString()), 'update']) : this.router.navigate(['project/create']);
+    if (data) {
+      const encryptedID = this.authService.encrypt(data.id.toString());
+      this.router.navigate(['project', this.id, 'update', encryptedID]);
+      return;
+    }
+    this.router.navigate(['project', this.id, 'create']);
   }
   onView(data: ProjectTaskModel) {
-    const encryptedID = this.authService.encrypt(data.id.toString());
-    const encryptedProjectID = this.authService.encrypt(data.project_id.toString());
-    this.dialog.open(CreateUpdateComponent, {
+    this.dialog.open(ViewComponent, {
       data: {
-        title: 'Confirm',
+        title: 'Project Task Details',
         message: 'Are you sure you want to log out?',
-        cancelButton: 'Cancel',
-        confirmButton: 'Yes',
-        id: encryptedID,
-        project_id: encryptedProjectID
+        cancelButton: 'Close',
+        confirmButton: 'Update',
+        task: data
+      }
+    }).afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        const encryptedID = this.authService.encrypt(data.id.toString());
+        this.router.navigate(['project', this.id, 'update', encryptedID]);
       }
     });
-
-    // dialogRef.afterClosed().subscribe((result: boolean) => {
-    //   // if (result) this.store.dispatch(logout());
-    // });
   }
   onDelete(data: ProjectTaskModel) {
     const dialogRef = this.dialog.open(DialogComponent, {

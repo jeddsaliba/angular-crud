@@ -1,4 +1,4 @@
-<section class="p-16">
+<section class="p-16" *ngIf="!route.children.length">
     <div class="row mb-16">
         <div class="col-12">
             <xng-breadcrumb></xng-breadcrumb>
@@ -35,8 +35,12 @@
                                     [required]="true"
                                 ></app-input>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-12">
-                                
+                                <div class="d-flex justify-content-end">
+                                    <button mat-raised-button color="primary">Update</button>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -46,3 +50,4 @@
     </div>
     <app-task-list [id]="id"></app-task-list>
 </section>
+<router-outlet></router-outlet>

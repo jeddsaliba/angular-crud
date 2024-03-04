@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { getProjectList } from 'src/app/shared/store/project/project.action';
+import { deleteProjectDelete, getProjectList } from 'src/app/shared/store/project/project.action';
 import { ProjectModel } from 'src/app/shared/store/project/project.model';
 @Component({
   selector: 'app-list',
@@ -20,7 +22,8 @@ export class ListComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private store: Store,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
   ngOnInit(): void {
     this.getList();
@@ -55,6 +58,23 @@ export class ListComponent implements OnInit {
   onView(data: ProjectModel) {
     const encryptedID = this.authService.encrypt(data.id.toString());
     this.router.navigate(['/project', encryptedID]);
+  }
+  onDelete(data: ProjectModel) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Confirm',
+        message: 'Are you sure you want to delete this project?',
+        cancelButton: 'Cancel',
+        confirmButton: 'Yes'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      const encryptedID = this.authService.encrypt(data.id.toString());
+      if (result) this.store.dispatch(deleteProjectDelete({
+        id: encryptedID
+      }));
+    });
   }
 }
 

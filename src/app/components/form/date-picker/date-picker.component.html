@@ -2,14 +2,10 @@
     <div class="row">
         <mat-form-field class="col-12">
             <mat-label>{{ fieldName }}</mat-label>
-            <input matInput
-                [type]="type"
-                [placeholder]="placeholder"
-                [formControlName]="controlName"
-                [required]="required"
-            >
-            <mat-icon matSuffix *ngIf="isPercent">percent</mat-icon>
+            <input matInput [matDatepicker]="picker" [formControlName]="controlName">
             <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="formGroup.controls[controlName].touched && formGroup.controls[controlName].invalid">
                 <span *ngIf="formGroup.get(controlName).hasError('required')">{{ fieldName }} is required</span>
                 <span *ngIf="formGroup.get(controlName).hasError('minlength')">{{ fieldName }}'s minimum length is {{ formGroup.get(controlName)?.errors?.minlength?.requiredLength }} characters</span>

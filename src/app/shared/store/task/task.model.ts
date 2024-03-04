@@ -6,7 +6,9 @@ export interface ProjectTaskModel {
     created_at: string,
     start_date: string,
     end_date: string,
-    assigned_to_name: string
+    assigned_to: number,
+    assigned_to_name: string,
+    status: string
 }
 
 export interface ProjectTasksModel {

@@ -14,7 +14,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { TemplateComponent } from './template/template.component';
 import { LoginComponent } from './pages/auth/login/login.component';
-import { NgxEditorModule } from 'ngx-editor';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { userReducer } from './shared/store/user/user.reducer';
@@ -53,7 +52,6 @@ import { InputModule } from './components/form/input/input.module';
     HttpClientModule,
     ReactiveFormsModule,
     BreadcrumbModule,
-    NgxEditorModule,
     InputModule,
     StoreModule.forRoot({
       user: userReducer,
