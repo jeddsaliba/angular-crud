@@ -77,6 +77,6 @@ export class DatatableComponent implements OnInit {
     this.eventOnDelete.emit(data);
   }
   onDownload(data: any): void {
-    console.log(data);
+    return data;
   }
 }

@@ -72,7 +72,11 @@ export class ProjectTaskEffect {
         const { project_id, data } = payload;
         return this.taskService.create(project_id, data).pipe(
           map((data) => {
+            this.store.dispatch(notificationSuccessDialog(data.message));
             return postProjectTaskCreateSuccess(data);
+          }),
+          tap(() => {
+            this.location.back();
           }),
           takeUntil(this.actions$.pipe(ofType(ProjectTaskType.CREATE_CANCEL))),
           catchError(({ error }) => of(notificationErrorDialog(error?.message)))
