@@ -19,13 +19,10 @@ export class ToolbarComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(sessionStorage.getItem('user') || '{}');
   }
-  onHandleLogout(): void {
-    this.onHandleConfirm();
+  onLogout(): void {
+    this.onConfirm();
   }
-  onHandleGoToProfile(): void {
-    this.router.navigate(['/user/profile']);
-  }
-  onHandleConfirm() {
+  onConfirm() {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
         title: 'Confirm',

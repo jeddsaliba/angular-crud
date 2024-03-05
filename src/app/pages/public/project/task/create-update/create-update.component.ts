@@ -31,6 +31,11 @@ export class CreateUpdateComponent implements OnInit {
   projectID?: string;
   id?: string;
   userOptions: UserModel[] = [];
+  statusOptions: any[] = [
+    { label: 'Pending', value: 'Pending'},
+    { label: 'Ongoing', value: 'Ongoing'},
+    { label: 'Completed', value: 'Completed'}
+  ]
   constructor(
     private route: ActivatedRoute,
     private store: Store,

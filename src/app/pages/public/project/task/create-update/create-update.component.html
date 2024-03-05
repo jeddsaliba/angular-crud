@@ -15,7 +15,7 @@
                     </div>
                     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <app-input
                                     [formGroup]="taskForm"
                                     [type]="'text'"
@@ -25,13 +25,23 @@
                                     [required]="true"
                                 ></app-input>
                             </div>
-                            <div class="col-6">
+                            <div class="col-4">
                                 <app-select
                                     [formGroup]="taskForm"
                                     [options]="userOptions"
                                     [controlName]="'assigned_to'"
                                     [fieldName]="'Assigned To'"
                                     [placeholder]="'Choose a user'"
+                                    [required]="true"
+                                ></app-select>
+                            </div>
+                            <div class="col-4">
+                                <app-select
+                                    [formGroup]="taskForm"
+                                    [options]="statusOptions"
+                                    [controlName]="'status'"
+                                    [fieldName]="'Status'"
+                                    [placeholder]="'Choose status'"
                                     [required]="true"
                                 ></app-select>
                             </div>
@@ -48,7 +58,7 @@
                                 ></app-quill-editor>
                             </div>
                         </div>
-                        <!-- <div class="row">
+                        <div class="row">
                             <div class="col-6">
                                 <app-date-picker
                                     [formGroup]="taskForm"
@@ -67,7 +77,7 @@
                                     [required]="true"
                                 ></app-date-picker>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="d-flex justify-content-end">

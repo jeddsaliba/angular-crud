@@ -1,7 +1,29 @@
 <section class="p-16">
-    <div class="row">
+    <div class="row mb-16">
         <div class="col-12">
             <xng-breadcrumb></xng-breadcrumb>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <mat-card class="p-16">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Task Status</h2>
+                    </div>
+                </div>
+                <app-status></app-status>
+            </mat-card>
+        </div>
+        <div class="col-8">
+            <mat-card class="p-16">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Top Performers</h2>
+                    </div>
+                </div>
+                <app-top-performers></app-top-performers>
+            </mat-card>
         </div>
     </div>
 </section>

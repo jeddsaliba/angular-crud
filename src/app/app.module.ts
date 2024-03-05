@@ -20,7 +20,6 @@ import { userReducer } from './shared/store/user/user.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffect } from './shared/store/user/user.effect';
 import { DialogEffect } from './shared/store/dialog/dialog.effect';
-import { DashboardComponent } from './pages/public/dashboard/dashboard.component';
 import { ToolbarComponent } from './template/toolbar/toolbar.component';
 import { environment } from 'src/environments/environment';
 import { DialogComponent } from './components/dialog/dialog.component';
@@ -31,6 +30,8 @@ import { datatableReducer } from './shared/store/datatable/datatable.reducer';
 import { projectTaskReducer } from './shared/store/task/task.reducer';
 import { ProjectTaskEffect } from './shared/store/task/task.effect';
 import { InputModule } from './components/form/input/input.module';
+import { chartReducer } from './shared/store/chart/chart.reducer';
+import { ChartEffect } from './shared/store/chart/chart.effect';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,6 @@ import { InputModule } from './components/form/input/input.module';
     ButtonComponent,
     TableComponent,
     LoginComponent,
-    DashboardComponent,
     DialogComponent
   ],
   imports: [
@@ -57,7 +57,8 @@ import { InputModule } from './components/form/input/input.module';
       user: userReducer,
       project: projectReducer,
       datatable: datatableReducer,
-      task: projectTaskReducer
+      task: projectTaskReducer,
+      chart: chartReducer
     }),
     !environment.production
             ? StoreDevtoolsModule.instrument({
@@ -70,7 +71,8 @@ import { InputModule } from './components/form/input/input.module';
       ProjectEffect,
       ProjectTaskEffect,
       DialogEffect,
-      DataTableEffect
+      DataTableEffect,
+      ChartEffect
     ])
   ],
   providers: [

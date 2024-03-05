@@ -9,5 +9,8 @@ export const urls = {
   create: 'create',
   update: 'update',
   delete: 'delete',
-  user: 'user'
+  user: 'user',
+  status: 'status',
+  top_performers: 'top-performers',
+  chart: 'chart'
 };

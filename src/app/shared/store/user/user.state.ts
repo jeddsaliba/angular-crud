@@ -15,17 +15,7 @@ export const UserTableHeads: any = [
     key: 'email',
     label: 'Email',
     canSort: true,
-  },
-  {
-    key: 'actions',
-    label: 'Actions',
-    canView: true,
-    canEdit: true,
-    canDelete: true,
-    canArchive: false,
-    canSort: false,
-    showActions: true,
-  },
+  }
 ];
 
 const UserInitialState: UserModel = {

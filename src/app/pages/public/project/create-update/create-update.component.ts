@@ -31,8 +31,12 @@ export class CreateUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       this.id = params.id;
+      if (this.id) {
+        this.getProjectDetails();
+      } else {
+        this.initForm();
+      }
     });
-    this.getProjectDetails();
   }
   getProjectDetails() {
     this.store.dispatch(getProjectDetails(this.id));

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectTableCurrentPage, selectTableData, selectTableHeads, selectTableMessage, selectTableParams, selectTableTotal } from 'src/app/shared/store/datatable/datatable.selector';
 import { Observable, of } from 'rxjs';
@@ -31,6 +31,7 @@ export class DatatableComponent implements OnInit {
   @Output() eventOnView: EventEmitter<any> = new EventEmitter();
   @Output() eventOnEdit: EventEmitter<any> = new EventEmitter();
   @Output() eventOnDelete: EventEmitter<any> = new EventEmitter();
+  @Input() canCreate = false;
   constructor(
     private store: Store
   ) { }

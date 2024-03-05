@@ -10,6 +10,8 @@ import { setDataTable } from '../datatable/datatable.action';
 import { ProjectTableHeads } from './project.state';
 import { Project } from './project.model';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Injectable()
 export class ProjectEffect {
@@ -23,7 +25,9 @@ export class ProjectEffect {
     private projectService: ProjectService,
     private actions$: Actions,
     private store: Store<Project>,
-    private location: Location
+    private location: Location,
+    private router: Router,
+    private authService: AuthService
   ) {}
   _getProjectList = createEffect(() => {
     return this.actions$.pipe(
@@ -70,7 +74,13 @@ export class ProjectEffect {
         const { data } = payload;
         return this.projectService.create(data).pipe(
           map((data) => {
+            this.store.dispatch(notificationSuccessDialog(data.message));
             return postProjectCreateSuccess(data);
+          }),
+          tap(({ payload }) => {
+            const { result } = payload;
+            const encryptedID = this.authService.encrypt(result.id.toString());
+            this.router.navigate(['project', encryptedID]);
           }),
           takeUntil(this.actions$.pipe(ofType(ProjectType.CREATE_CANCEL))),
           catchError(({ error }) => of(notificationErrorDialog(error?.message)))
