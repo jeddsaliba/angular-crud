@@ -6,7 +6,7 @@ The purpose of this project is to showcase an Angular Project with basic CRUD fu
 
 ## Table of Contents
 [Dependencies](#dependencies)<br/>
-[Plugins Used](#plugins-used)<br/>
+[Plugin(s) Used](#plugins-used)<br/>
 [Installation](#installation)<br/>
 [Development Server](#development-server)<br/>
 [Support](#support)
@@ -16,7 +16,7 @@ The purpose of this project is to showcase an Angular Project with basic CRUD fu
 To install the Backend (API), click [here](https://github.com/jeddsaliba/laravel-crud).
 
 <a name="plugins-used"></a>
-## Plugins Used
+## Plugin(s) Used
 - [Angular Material](https://material.angular.io)
 - [NGRX](https://ngrx.io)
 - [Bootstrap](https://getbootstrap.com)
