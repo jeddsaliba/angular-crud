@@ -32,7 +32,7 @@ export class TopPerformersComponent implements OnInit {
       }
     }
   };
-  
+  isLoaded = false;
   constructor(
     private store: Store
   ) {}
@@ -59,6 +59,6 @@ export class TopPerformersComponent implements OnInit {
       });
       this.data.labels = this.labels;
       this.data.datasets = datasets;
-    })
+    });
   }
 }
