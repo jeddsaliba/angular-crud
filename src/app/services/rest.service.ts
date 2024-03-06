@@ -2,7 +2,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -33,7 +33,8 @@ export class RestService {
   }
 
   get(endpoint: string): Observable<any> {
-    return this.httpClient.get(this.restEndpoint(endpoint), this.httpHeaders());
+    return this.httpClient.get(this.restEndpoint(endpoint), this.httpHeaders())
+    .pipe(catchError(this.errorHandler));
   }
 
   post(endpoint: string, body: unknown): Observable<any> {
@@ -41,7 +42,7 @@ export class RestService {
       this.restEndpoint(endpoint),
       body,
       this.httpHeaders()
-    );
+    ).pipe(catchError(this.errorHandler));
   }
 
   put(endpoint: string, body: unknown): Observable<any> {
@@ -49,13 +50,25 @@ export class RestService {
       this.restEndpoint(endpoint),
       body,
       this.httpHeaders()
-    );
+    ).pipe(catchError(this.errorHandler));
   }
 
   delete(endpoint: string): Observable<any> {
     return this.httpClient.delete(
       this.restEndpoint(endpoint),
       this.httpHeaders()
-    );
+    ).pipe(catchError(this.errorHandler));
+  }
+
+  private errorHandler = (response: Response) => {
+    switch (response.status) {
+      case 401:
+        sessionStorage.clear();
+        this.router.navigate(['/login']);
+        break;
+      default:
+        break;
+    }
+    return throwError(response);
   }
 }
