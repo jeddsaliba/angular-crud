@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
-  url: 'https://api.thisinfosystem.online',
-  secureUrl: 'https://api.thisinfosystem.online',
+  url: 'http://localhost:8000/api',
+  secureUrl: 'https://localhost:8000/api',
   appName: 'Angular 16 CRUD',
   hashKeys: {
-    salt: 'l@r@v3lcrud',
-    keyLength: 12,
-    secretKey: 'l@r@v3lcrud',
+    salt: 's72GRGmT59LrNdU6vMVmjQKSahF9gJ9ll1Wjmm3wcBFj7op9ty',
+    minLength: 12,
+    alphabet: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
   }
 };

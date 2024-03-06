@@ -9,8 +9,8 @@ export const environment = {
   appName: 'Angular 16 CRUD',
   hashKeys: {
     salt: 's72GRGmT59LrNdU6vMVmjQKSahF9gJ9ll1Wjmm3wcBFj7op9ty',
-    keyLength: 12,
-    secretKey: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+    minLength: 12,
+    alphabet: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
   },
 };
 

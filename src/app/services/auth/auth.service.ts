@@ -20,7 +20,7 @@ export class AuthService {
   }
   encrypt(value: string) {
     try {
-      const hashKey = new HashID(environment.hashKeys.salt, environment.hashKeys.keyLength, environment.hashKeys.secretKey);
+      const hashKey = new HashID(environment.hashKeys.salt, environment.hashKeys.minLength, environment.hashKeys.alphabet);
       return hashKey.encode(value);
     } catch (error) {
       return value;
