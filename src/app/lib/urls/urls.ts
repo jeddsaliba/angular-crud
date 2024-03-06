@@ -12,5 +12,6 @@ export const urls = {
   user: 'user',
   status: 'status',
   top_performers: 'top-performers',
+  performance: 'performance',
   chart: 'chart'
 };

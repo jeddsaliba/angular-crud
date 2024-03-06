@@ -15,4 +15,7 @@ export class ChartService {
   chartTopPerformers(): Observable<any> {
     return this.rest.get(`${urls.chart}/${urls.top_performers}`);
   }
+  chartPerformancePerMonth(params: any): Observable<any> {
+    return this.rest.get(`${urls.chart}/${urls.performance}?${this.rest.restEndpointParams(params)}`);
+  }
 }

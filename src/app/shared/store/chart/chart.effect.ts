@@ -5,7 +5,7 @@ import {
   notificationErrorDialog
 } from '../dialog/dialog.action';
 import { ChartType } from './chart.type';
-import { getChartStatusSuccess, getChartTopPerformersSuccess } from './chart.action';
+import { getChartPerformancePerMonthSuccess, getChartStatusSuccess, getChartTopPerformersSuccess } from './chart.action';
 import { ChartService } from 'src/app/services/chart/chart.service';
 
 @Injectable()
@@ -39,6 +39,21 @@ export class ChartEffect {
             return getChartTopPerformersSuccess(result);
           }),
           takeUntil(this.actions$.pipe(ofType(ChartType.CHART_TOP_PERFORMERS_CANCEL))),
+          catchError(({ error }) => of(notificationErrorDialog(error?.message)))
+        );
+      })
+    );
+  });
+  _getChartPerformancePerMonth = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ChartType.CHART_PERFORMANCE_PER_MONTH),
+      switchMap(({payload}) => {
+        return this.chartService.chartPerformancePerMonth(payload).pipe(
+          map((data) => {
+            const { result } = data;
+            return getChartPerformancePerMonthSuccess(result);
+          }),
+          takeUntil(this.actions$.pipe(ofType(ChartType.CHART_PERFORMANCE_PER_MONTH_CANCEL))),
           catchError(({ error }) => of(notificationErrorDialog(error?.message)))
         );
       })

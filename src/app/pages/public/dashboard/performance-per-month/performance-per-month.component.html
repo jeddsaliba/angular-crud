@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between">
+            <h2>Performance Per Month</h2>
+            <form [formGroup]="yearForm">
+                <app-select
+                    [formGroup]="yearForm"
+                    [options]="yearOptions"
+                    [controlName]="'year'"
+                    [fieldName]="'Choose a year'"
+                    [placeholder]="'Choose a year'"
+                    [required]="true"
+                    (eventOnChange)="onChange($event)"
+                ></app-select>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-center">
+            <canvas baseChart
+                [type]="'line'"
+                [data]="data"
+                [options]="lineChartOptions"
+                [legend]="lineChartLegend">
+            </canvas>
+        </div>
+    </div>
+</div>

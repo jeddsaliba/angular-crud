@@ -7,19 +7,26 @@ import { DashboardComponent } from './dashboard.component';
 import { NgChartsModule } from 'ng2-charts';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { TopPerformersComponent } from './top-performers/top-performers.component';
+import { PerformancePerMonthComponent } from './performance-per-month/performance-per-month.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectModule } from 'src/app/components/form/select/select.module';
 
 @NgModule({
   declarations: [
     StatusComponent,
     DashboardComponent,
-    TopPerformersComponent
+    TopPerformersComponent,
+    PerformancePerMonthComponent
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     BreadcrumbModule,
     MaterialThemeModule,
-    NgChartsModule
+    NgChartsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SelectModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
