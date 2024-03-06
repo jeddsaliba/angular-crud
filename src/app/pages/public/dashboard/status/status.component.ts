@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { ChartOptions } from 'chart.js';
 import { Observable, of } from 'rxjs';
 import { getChartStatus } from 'src/app/shared/store/chart/chart.action';
-import { ChartModel } from 'src/app/shared/store/chart/chart.model';
+import { ChartStatusModel } from 'src/app/shared/store/chart/chart.model';
 import { selectChartStatus } from 'src/app/shared/store/chart/chart.selector';
 
 @Component({
@@ -15,30 +15,22 @@ export class StatusComponent implements OnInit {
   public pieChartOptions: ChartOptions<'pie'> = {
     responsive: false,
   };
-  labels: string[] = [];
-  datasets: any = [];
-  public pieChartDatasets = [{
-    data: [ 300, 500, 100 ]
-  }];
+  labels: string[] = [
+    'Pending', 'Ongoing', 'Completed'
+  ];
+  datasets: any = [{data:[]}];
   public pieChartLegend = true;
   public pieChartPlugins = [];
-  details$: Observable<ChartModel[]> = of([]);
+  details$: Observable<ChartStatusModel> = of();
   constructor(
     private store: Store
   ) {}
   ngOnInit(): void {
     this.store.dispatch(getChartStatus());
     this.details$ = this.store.select(selectChartStatus);
-    this.details$.subscribe((data: ChartModel[]) => {
-      this.labels = data.map((label) => {
-        return label.label
-      });
-      const values = data.map((value) => {
-        return value.value
-      });
-      this.datasets = [{
-        data: values
-      }];
+    this.details$.subscribe((data: ChartStatusModel) => {
+      this.labels = data.labels;
+      this.datasets = [{ data: data.data }];
     });
   }
 }
