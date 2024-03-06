@@ -10,7 +10,7 @@ export const environment = {
   hashKeys: {
     salt: 's72GRGmT59LrNdU6vMVmjQKSahF9gJ9ll1Wjmm3wcBFj7op9ty',
     keyLength: 12,
-    secretKey: 's72GRGmT59LrNdU6vMVmjQKSahF9gJ9ll1Wjmm3wcBFj7op9ty',
+    secretKey: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
   },
 };
 
