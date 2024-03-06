@@ -21,6 +21,14 @@ To install the Backend (API), click [here](https://github.com/jeddsaliba/laravel
 - [NGRX](https://ngrx.io)
 - [Bootstrap](https://getbootstrap.com)
 - [Hashids](https://www.npmjs.com/package/hashids)
+  - For Hashids, you can modify the following in your `environment.ts` and `environment.prod.ts`:
+    ```bash
+    hashKeys: {
+        salt: 's72GRGmT59LrNdU6vMVmjQKSahF9gJ9ll1Wjmm3wcBFj7op9ty',
+        minLength: 12,
+        alphabet: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+    }
+    ```
 - [ng2-charts](https://www.npmjs.com/package/ng2-charts)
 - [ngx-quill](https://www.npmjs.com/package/ngx-quill)
 - [xng-breadcrumb](https://www.npmjs.com/package/xng-breadcrumb)
