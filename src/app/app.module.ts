@@ -32,6 +32,7 @@ import { ProjectTaskEffect } from './shared/store/task/task.effect';
 import { InputModule } from './components/form/input/input.module';
 import { chartReducer } from './shared/store/chart/chart.reducer';
 import { ChartEffect } from './shared/store/chart/chart.effect';
+import { ErrorComponent } from './pages/error/error.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ChartEffect } from './shared/store/chart/chart.effect';
     ButtonComponent,
     TableComponent,
     LoginComponent,
+    ErrorComponent,
     DialogComponent
   ],
   imports: [

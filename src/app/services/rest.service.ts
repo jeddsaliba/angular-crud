@@ -66,6 +66,9 @@ export class RestService {
         sessionStorage.clear();
         this.router.navigate(['/login']);
         break;
+      case 404:
+        this.router.navigate(['/404']);
+        break;
       default:
         break;
     }
