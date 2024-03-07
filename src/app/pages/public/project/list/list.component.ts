@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DialogComponent } from 'src/app/components/dialog/dialog.component';
+import { urls } from 'src/app/lib/urls/urls';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { deleteProjectDelete, getProjectList } from 'src/app/shared/store/project/project.action';
 import { ProjectModel } from 'src/app/shared/store/project/project.model';
@@ -50,14 +51,14 @@ export class ListComponent implements OnInit {
   onCreateUpdate(data?: ProjectModel | null) {
     if (data) {
       const encryptedID = this.authService.encrypt(data.id.toString());
-      this.router.navigate(['project', encryptedID, 'update']);
+      this.router.navigate([`${urls.project}`, encryptedID, `${urls.update}`]);
       return;
     }
-    this.router.navigate(['project/create']);
+    this.router.navigate([`${urls.project}/${urls.create}`]);
   }
   onView(data: ProjectModel) {
     const encryptedID = this.authService.encrypt(data.id.toString());
-    this.router.navigate(['/project', encryptedID]);
+    this.router.navigate([`${urls.project}`, encryptedID]);
   }
   onDelete(data: ProjectModel) {
     const dialogRef = this.dialog.open(DialogComponent, {

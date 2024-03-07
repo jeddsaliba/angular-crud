@@ -14,6 +14,7 @@ import { User } from './user.model';
 import { UserService } from 'src/app/services/user/user.service';
 import { setDataTable } from '../datatable/datatable.action';
 import { UserTableHeads } from './user.state';
+import { urls } from 'src/app/lib/urls/urls';
 
 @Injectable()
 export class UserEffect {
@@ -37,7 +38,7 @@ export class UserEffect {
             sessionStorage.setItem('access_token', result?.access_token);
             sessionStorage.setItem('user', JSON.stringify(result?.user));
             this.store.dispatch(notificationSuccessDialog(payload?.message));
-            this.router.navigate(['/dashboard']);
+            this.router.navigate([`${urls.dashboard}`]);
           }),
           catchError(({ error }) => of(notificationErrorDialog(error?.message)))
         );
@@ -55,7 +56,7 @@ export class UserEffect {
           tap(({ payload }) => {
             sessionStorage.clear();
             this.store.dispatch(notificationSuccessDialog(payload?.message));
-            this.router.navigate(['/login']);
+            this.router.navigate([`${urls.login}`]);
           }),
           catchError(({ error }) => of(notificationErrorDialog(error?.message)))
         );

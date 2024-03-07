@@ -7,6 +7,7 @@ import { ProjectTaskModel } from 'src/app/shared/store/task/task.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 import { ViewComponent } from './../view/view.component';
+import { urls } from 'src/app/lib/urls/urls';
 
 @Component({
   selector: 'app-task-list',
@@ -55,10 +56,10 @@ export class ListComponent implements OnInit {
   onCreateUpdate(data?: ProjectTaskModel | null) {
     if (data) {
       const encryptedID = this.authService.encrypt(data.id.toString());
-      this.router.navigate(['project', this.id, 'update', encryptedID]);
+      this.router.navigate([`${urls.project}`, this.id, `${urls.update}`, encryptedID]);
       return;
     }
-    this.router.navigate(['project', this.id, 'create']);
+    this.router.navigate([`${urls.project}`, this.id, `${urls.create}`]);
   }
   onView(data: ProjectTaskModel) {
     this.dialog.open(ViewComponent, {
@@ -72,7 +73,7 @@ export class ListComponent implements OnInit {
     }).afterClosed().subscribe((result: boolean) => {
       if (result) {
         const encryptedID = this.authService.encrypt(data.id.toString());
-        this.router.navigate(['project', this.id, 'update', encryptedID]);
+        this.router.navigate([`${urls.project}`, this.id, `${urls.update}`, encryptedID]);
       }
     });
   }

@@ -12,6 +12,7 @@ import { Project } from './project.model';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { urls } from 'src/app/lib/urls/urls';
 
 @Injectable()
 export class ProjectEffect {
@@ -80,7 +81,7 @@ export class ProjectEffect {
           tap(({ payload }) => {
             const { result } = payload;
             const encryptedID = this.authService.encrypt(result.id.toString());
-            this.router.navigate(['project', encryptedID]);
+            this.router.navigate([`${urls.project}`, encryptedID]);
           }),
           takeUntil(this.actions$.pipe(ofType(ProjectType.CREATE_CANCEL))),
           catchError(({ error }) => of(notificationErrorDialog(error?.message)))

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { urls } from '../lib/urls/urls';
 
 @Injectable({
   providedIn: 'root',
@@ -64,10 +65,10 @@ export class RestService {
     switch (response.status) {
       case 401:
         sessionStorage.clear();
-        this.router.navigate(['/login']);
+        this.router.navigate([`${urls.login}`]);
         break;
       case 404:
-        this.router.navigate(['/404']);
+        this.router.navigate([`${urls[404]}`]);
         break;
       default:
         break;

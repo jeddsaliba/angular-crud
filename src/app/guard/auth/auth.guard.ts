@@ -7,6 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { urls } from 'src/app/lib/urls/urls';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class AuthGuard implements CanActivate {
       /* console.log(next);
       console.log(state); */
     if (!sessionStorage.getItem('access_token')) {
-      this.router.navigate(['/login']);
+      this.router.navigate([`${urls.login}`]);
       return false;
     } else {
       return true;

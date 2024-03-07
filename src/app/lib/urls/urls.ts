@@ -13,5 +13,7 @@ export const urls = {
   status: 'status',
   top_performers: 'top-performers',
   performance: 'performance',
-  chart: 'chart'
+  chart: 'chart',
+  '404': '404',
+  dashboard: 'dashboard'
 };
