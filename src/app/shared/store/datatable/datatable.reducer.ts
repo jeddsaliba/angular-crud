@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { DataTableInitialState } from "./datatable.state";
-import { setDataTable } from "./datatable.action";
+import { clearDataTable, setDataTable } from "./datatable.action";
 
 const _datatableReducer = createReducer(
     DataTableInitialState,
@@ -14,6 +14,11 @@ const _datatableReducer = createReducer(
             table_heads: payload.table_heads ?? state.table_heads,
             params: payload.params ?? state.params,
             message: payload.message ?? state.message
+        }
+    }),
+    on(clearDataTable, () => {
+        return {
+            ...DataTableInitialState
         }
     })
 )

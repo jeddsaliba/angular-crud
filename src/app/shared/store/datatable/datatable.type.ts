@@ -1,3 +1,4 @@
 export enum DatatableType {
-    DATATABLE = '[DATATABLE] Datatable'
+    DATATABLE = '[DATATABLE] Set Datatable',
+    DATATABLE_CLEAR = '[DATATABLE] Clear Datatable',
 }

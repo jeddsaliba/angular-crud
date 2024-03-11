@@ -1,15 +1,15 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectTableCurrentPage, selectTableData, selectTableHeads, selectTableMessage, selectTableParams, selectTableTotal } from 'src/app/shared/store/datatable/datatable.selector';
 import { Observable, of } from 'rxjs';
-import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
+import { clearDataTable } from 'src/app/shared/store/datatable/datatable.action';
 
 @Component({
   selector: 'app-datatable',
   templateUrl: './datatable.component.html'
 })
-export class DatatableComponent implements OnInit {
+export class DatatableComponent implements OnInit, OnDestroy {
 
   limitOptions: number[] = [10, 25, 50, 100];
   tableData$: Observable<any> = of([]);
@@ -22,7 +22,6 @@ export class DatatableComponent implements OnInit {
     direction: 'desc'
   };
   params: any;
-  limit = new FormControl(10);
   @Output() eventOnGotoPage: EventEmitter<any> = new EventEmitter();
   @Output() eventOnChangeLimit: EventEmitter<any> = new EventEmitter();
   @Output() eventOnSearch: EventEmitter<string> = new EventEmitter();
@@ -78,5 +77,8 @@ export class DatatableComponent implements OnInit {
   }
   onDownload(data: any): void {
     return data;
+  }
+  ngOnDestroy(): void {
+    this.store.dispatch(clearDataTable());
   }
 }

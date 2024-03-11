@@ -7,3 +7,5 @@ export const setDataTable = createAction(
         payload,
     })
 );
+
+export const clearDataTable = createAction(DatatableType.DATATABLE_CLEAR);
