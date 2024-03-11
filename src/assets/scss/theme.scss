@@ -3,16 +3,6 @@
 }
 .bg-default {
     background-color: color(container, bg) !important;
-    /* &::before {
-        content: "";
-        background: url('./../images/logo.jpeg') no-repeat center center fixed;
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
-        opacity: 0.10;
-    } */
 }
 .mat-expansion-panel-body {
     padding: 0 !important;
