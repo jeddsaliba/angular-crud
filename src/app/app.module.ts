@@ -13,7 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { TemplateComponent } from './template/template.component';
-import { LoginComponent } from './pages/auth/login/login.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { userReducer } from './shared/store/user/user.reducer';
@@ -41,7 +40,6 @@ import { ErrorComponent } from './pages/error/error.component';
     TemplateComponent,
     ButtonComponent,
     TableComponent,
-    LoginComponent,
     ErrorComponent,
     DialogComponent
   ],
@@ -64,7 +62,7 @@ import { ErrorComponent } from './pages/error/error.component';
     }),
     !environment.production
             ? StoreDevtoolsModule.instrument({
-                maxAge: 25, // Retains last 25 states
+                maxAge: 10, // Retains last 25 states
                 logOnly: environment.production, // Restrict extension to log-only mode
             })
             : [],

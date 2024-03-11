@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { Observable, of } from 'rxjs';
-import { getChartPerformancePerMonth } from 'src/app/shared/store/chart/chart.action';
+import { getChartPerformancePerMonth, getChartPerformancePerMonthCancel } from 'src/app/shared/store/chart/chart.action';
 import { ChartPerformancePerMonthModel } from 'src/app/shared/store/chart/chart.model';
 import { selectChartPerformancePerMonth } from 'src/app/shared/store/chart/chart.selector';
 
@@ -12,7 +12,7 @@ import { selectChartPerformancePerMonth } from 'src/app/shared/store/chart/chart
   templateUrl: './performance-per-month.component.html',
   styleUrls: ['./performance-per-month.component.scss']
 })
-export class PerformancePerMonthComponent implements OnInit {
+export class PerformancePerMonthComponent implements OnInit, OnDestroy {
   yearForm: FormGroup | any;
   yearOptions: any[] = [];
   details$: Observable<ChartPerformancePerMonthModel> = of();
@@ -70,5 +70,8 @@ export class PerformancePerMonthComponent implements OnInit {
   onChange(value: any) {
     this.yearForm.controls.year.setValue(value);
     this.initData();
+  }
+  ngOnDestroy(): void {
+    this.store.dispatch(getChartPerformancePerMonthCancel());
   }
 }

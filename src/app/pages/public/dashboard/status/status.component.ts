@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ChartOptions } from 'chart.js';
 import { Observable, of } from 'rxjs';
-import { getChartStatus } from 'src/app/shared/store/chart/chart.action';
+import { getChartStatus, getChartStatusCancel } from 'src/app/shared/store/chart/chart.action';
 import { ChartStatusModel } from 'src/app/shared/store/chart/chart.model';
 import { selectChartStatus } from 'src/app/shared/store/chart/chart.selector';
 
@@ -11,7 +11,7 @@ import { selectChartStatus } from 'src/app/shared/store/chart/chart.selector';
   templateUrl: './status.component.html',
   styleUrls: ['./status.component.scss']
 })
-export class StatusComponent implements OnInit {
+export class StatusComponent implements OnInit, OnDestroy {
   public pieChartOptions: ChartOptions<'pie'> = {
     responsive: false,
   };
@@ -32,5 +32,8 @@ export class StatusComponent implements OnInit {
       this.labels = data.labels;
       this.datasets = [{ data: data.data }];
     });
+  }
+  ngOnDestroy(): void {
+    this.store.dispatch(getChartStatusCancel());
   }
 }

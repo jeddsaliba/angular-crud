@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ChartConfiguration } from 'chart.js';
 import { Observable, of } from 'rxjs';
-import { getChartTopPerformers } from 'src/app/shared/store/chart/chart.action';
+import { getChartTopPerformers, getChartTopPerformersCancel } from 'src/app/shared/store/chart/chart.action';
 import { ChartTopPerformersModel } from 'src/app/shared/store/chart/chart.model';
 import { selectChartTopPerformers } from 'src/app/shared/store/chart/chart.selector';
 
@@ -11,7 +11,7 @@ import { selectChartTopPerformers } from 'src/app/shared/store/chart/chart.selec
   templateUrl: './top-performers.component.html',
   styleUrls: ['./top-performers.component.scss']
 })
-export class TopPerformersComponent implements OnInit {
+export class TopPerformersComponent implements OnInit, OnDestroy {
   details$: Observable<ChartTopPerformersModel> = of();
 
   barChartLegend = true;
@@ -57,5 +57,8 @@ export class TopPerformersComponent implements OnInit {
         datasets: data.datasets
       };
     });
+  }
+  ngOnDestroy(): void {
+    this.store.dispatch(getChartTopPerformersCancel());
   }
 }
