@@ -64,6 +64,7 @@ export class RestService {
   private errorHandler = (response: Response) => {
     switch (response.status) {
       case 401:
+      case 403:
         sessionStorage.clear();
         this.router.navigate([`${urls.login}`]);
         break;
