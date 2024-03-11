@@ -62,7 +62,7 @@ import { ErrorComponent } from './pages/error/error.component';
     }),
     !environment.production
             ? StoreDevtoolsModule.instrument({
-                maxAge: 10, // Retains last 25 states
+                maxAge: 25, // Retains last 25 states
                 logOnly: environment.production, // Restrict extension to log-only mode
             })
             : [],
