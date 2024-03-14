@@ -4,8 +4,8 @@ export const environment = {
   secureUrl: 'https://localhost:8000/api',
   appName: 'Angular 16 CRUD',
   hashKeys: {
-    salt: 's72GRGmT59LrNdU6vMVmjQKSahF9gJ9ll1Wjmm3wcBFj7op9ty',
+    salt: 'HASH_KEY_SALT',
     minLength: 12,
-    alphabet: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+    alphabet: 'HASH_KEY_ALPHABET',
   }
 };
