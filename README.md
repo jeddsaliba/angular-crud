@@ -57,4 +57,4 @@ http://localhost:4200/
 
 <a name="support"></a>
 ## Support
-For support, email developer.jeddsaliba@gmail.com.
+For support, email jeddsaliba@gmail.com.
