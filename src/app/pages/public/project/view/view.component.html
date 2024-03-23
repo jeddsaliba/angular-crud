@@ -1,9 +1,4 @@
-<section class="p-16" *ngIf="!route.children.length">
-    <div class="row mb-16">
-        <div class="col-12">
-            <xng-breadcrumb></xng-breadcrumb>
-        </div>
-    </div>
+<ng-container *ngIf="!route.children.length">
     <div class="row mb-16">
         <div class="col-12">
             <mat-card class="p-16">
@@ -49,5 +44,5 @@
         </div>
     </div>
     <app-task-list [id]="id"></app-task-list>
-</section>
+</ng-container>
 <router-outlet></router-outlet>

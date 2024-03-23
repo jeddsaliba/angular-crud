@@ -1,12 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { getChartPerformancePerMonth, getChartPerformancePerMonthCancel } from '@shared/redux/chart/chart.action';
+import { ChartPerformancePerMonthModel } from '@shared/redux/chart/chart.model';
+import { selectChartPerformancePerMonth } from '@shared/redux/chart/chart.selector';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { Observable, of } from 'rxjs';
-import { getChartPerformancePerMonth, getChartPerformancePerMonthCancel } from 'src/app/shared/store/chart/chart.action';
-import { ChartPerformancePerMonthModel } from 'src/app/shared/store/chart/chart.model';
-import { selectChartPerformancePerMonth } from 'src/app/shared/store/chart/chart.selector';
-
 @Component({
   selector: 'app-performance-per-month',
   templateUrl: './performance-per-month.component.html',

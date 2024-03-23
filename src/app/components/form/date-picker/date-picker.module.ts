@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { MaterialThemeModule } from 'src/app/material-theme/material-theme.module';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 import { DatePickerComponent } from './date-picker.component';
+import { SharedModule } from '@shared/shared.module';
+
+
 
 @NgModule({
   declarations: [
@@ -13,8 +14,7 @@ import { DatePickerComponent } from './date-picker.component';
   ],
   imports: [
     CommonModule,
-    MaterialThemeModule,
-    ReactiveFormsModule
+    SharedModule
   ]
 })
 export class DatePickerModule { }

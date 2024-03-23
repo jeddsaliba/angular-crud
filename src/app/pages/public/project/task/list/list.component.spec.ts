@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListComponent } from './list.component';
+import { SharedModule } from '@shared/shared.module';
+import { ReduxModule } from '@shared/redux/redux.module';
+import { DatatableModule } from '@components/datatable/datatable.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -8,7 +12,13 @@ describe('ListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ListComponent]
+      declarations: [ListComponent],
+      imports: [
+        BrowserAnimationsModule,
+        SharedModule,
+        ReduxModule,
+        DatatableModule
+      ]
     });
     fixture = TestBed.createComponent(ListComponent);
     component = fixture.componentInstance;

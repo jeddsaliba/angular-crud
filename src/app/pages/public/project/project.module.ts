@@ -1,37 +1,33 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProjectRoutingModule } from './project-routing.module';
-import { ListComponent } from './list/list.component';
 import { CreateUpdateComponent } from './create-update/create-update.component';
-import { BreadcrumbModule } from 'xng-breadcrumb';
-import { MaterialThemeModule } from 'src/app/material-theme/material-theme.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DatatableModule } from 'src/app/components/datatable/datatable.module';
+import { ListComponent } from './list/list.component';
 import { ViewComponent } from './view/view.component';
-import { InputModule } from 'src/app/components/form/input/input.module';
+import { TaskComponent } from './task/task.component';
+import { SharedModule } from '@shared/shared.module';
+import { DatatableModule } from '@components/datatable/datatable.module';
+import { InputModule } from '@components/form/input/input.module';
 import { TaskModule } from './task/task.module';
-import { QuillEditorModule } from 'src/app/components/form/quill-editor/quill-editor.module';
+import { QuillEditorModule } from '@components/form/quill-editor/quill-editor.module';
 
 
 @NgModule({
   declarations: [
-    ListComponent,
     CreateUpdateComponent,
-    ViewComponent
+    ListComponent,
+    ViewComponent,
+    TaskComponent
   ],
   imports: [
     CommonModule,
     ProjectRoutingModule,
-    BreadcrumbModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MaterialThemeModule,
+    SharedModule,
     DatatableModule,
     InputModule,
     TaskModule,
     QuillEditorModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  ]
 })
 export class ProjectModule { }

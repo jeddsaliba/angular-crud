@@ -1,23 +1,56 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ErrorComponent } from './pages/error/error.component';
-import { AuthGuard } from './guard/auth/auth.guard';
 import { TemplateComponent } from './template/template.component';
+import { ErrorComponent } from '@pages/error/error.component';
+import { authGuard } from '@guard/auth/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: TemplateComponent,
     canActivate: [
-      AuthGuard
+      authGuard
     ],
-    loadChildren: () => import('./pages/pages.module').then((m) => m.PagesModule)
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./pages/public/dashboard/dashboard.module').then((m) => m.DashboardModule),
+        data: {
+          breadcrumb: {
+            label: 'Dashboard'
+          }
+        }
+      },
+      {
+        path: 'project',
+        loadChildren: () => import('./pages/public/project/project.module').then((m) => m.ProjectModule),
+        data: {
+          breadcrumb: {
+            label: 'Projects',
+          },
+        }
+      },
+      {
+        path: 'user',
+        loadChildren: () => import('./pages/public/user/user.module').then((m) => m.UserModule),
+        data: {
+          breadcrumb: {
+            label: 'Users',
+          },
+        }
+      }
+    ]
   },
   { path: 'login',
     loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule)
   },
-  { path: '404', component: ErrorComponent },
-  { path: '**', redirectTo: '404' }
+  { path: 'error', component: ErrorComponent },
+  { path: '**', redirectTo: 'error' }
 ];
 
 @NgModule({

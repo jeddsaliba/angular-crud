@@ -1,53 +1,46 @@
-<section class="p-16">
-    <div class="row mb-16">
-        <div class="col-12">
-            <xng-breadcrumb></xng-breadcrumb>
-        </div>
-    </div>
-    <div class="row mb-16">
-        <div class="col-12">
-            <mat-card class="p-16">
-                <ng-container *ngIf="projectForm">
+<div class="row mb-16">
+    <div class="col-12">
+        <mat-card class="p-16">
+            <ng-container *ngIf="projectForm">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Project Details</h2>
+                    </div>
+                </div>
+                <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
                     <div class="row">
                         <div class="col-12">
-                            <h2>Project Details</h2>
+                            <app-input
+                                [formGroup]="projectForm"
+                                [type]="'text'"
+                                [controlName]="'name'"
+                                [fieldName]="'Project Name'"
+                                [placeholder]="'Enter project name'"
+                                [required]="true"
+                            ></app-input>
                         </div>
                     </div>
-                    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
-                        <div class="row">
-                            <div class="col-12">
-                                <app-input
-                                    [formGroup]="projectForm"
-                                    [type]="'text'"
-                                    [controlName]="'name'"
-                                    [fieldName]="'Project Name'"
-                                    [placeholder]="'Enter project name'"
-                                    [required]="true"
-                                ></app-input>
+                    <div class="row">
+                        <div class="col-12">
+                            <app-quill-editor
+                                [formGroup]="projectForm"
+                                [type]="'text'"
+                                [controlName]="'description'"
+                                [fieldName]="'Project Description'"
+                                [placeholder]="'Enter project description'"
+                                [required]="true"
+                            ></app-quill-editor>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-end">
+                                <button mat-raised-button color="primary" [disabled]="!projectForm.valid">{{ id ? 'Update' : 'Create' }}</button>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <app-quill-editor
-                                    [formGroup]="projectForm"
-                                    [type]="'text'"
-                                    [controlName]="'description'"
-                                    [fieldName]="'Project Description'"
-                                    [placeholder]="'Enter project description'"
-                                    [required]="true"
-                                ></app-quill-editor>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="d-flex justify-content-end">
-                                    <button mat-raised-button color="primary" [disabled]="!projectForm.valid">{{ id ? 'Update' : 'Create' }}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </ng-container>
-            </mat-card>
-        </div>
+                    </div>
+                </form>
+            </ng-container>
+        </mat-card>
     </div>
-</section>
+</div>

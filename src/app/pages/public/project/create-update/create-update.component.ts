@@ -5,13 +5,12 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { DialogComponent } from '@components/dialog/dialog.component';
 import { Store } from '@ngrx/store';
+import { getProjectDetails, postProjectCreate, putProjectUpdate } from '@shared/redux/project/project.action';
+import { ProjectModel } from '@shared/redux/project/project.model';
+import { selectProjectDetails } from '@shared/redux/project/project.selector';
 import { Observable, of } from 'rxjs';
-import { ProjectModel } from 'src/app/shared/store/project/project.model';
-import { selectProjectDetails } from 'src/app/shared/store/project/project.selector';
-import { DialogComponent } from 'src/app/components/dialog/dialog.component';
-import { getProjectDetails, postProjectCreate, putProjectUpdate } from 'src/app/shared/store/project/project.action';
-
 
 @Component({
   selector: 'app-create-update',

@@ -1,3 +1,4 @@
+<app-loader></app-loader>
 <mat-drawer-container autosize class="h-100-per bg-default">
     <mat-drawer #drawer color="primary" fixedInViewport
         [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
@@ -22,6 +23,15 @@
     </mat-drawer>
     <mat-drawer-content>
         <app-toolbar></app-toolbar>
-        <router-outlet></router-outlet>
+        <div class="container-fluid">
+          <section class="p-16">
+              <div class="row mb-16">
+                  <div class="col-12">
+                      <xng-breadcrumb></xng-breadcrumb>
+                  </div>
+              </div>
+              <router-outlet></router-outlet>
+            </section>
+          </div>
     </mat-drawer-content>
 </mat-drawer-container>

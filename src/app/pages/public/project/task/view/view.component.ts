@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ProjectTaskModel } from 'src/app/shared/store/task/task.model';
+import { ProjectTaskModel } from '@shared/redux/task/task.model';
+
 export interface DialogData {
   title: string;
   message: string;
@@ -11,8 +12,7 @@ export interface DialogData {
 }
 @Component({
   selector: 'app-view',
-  templateUrl: './view.component.html',
-  styleUrls: ['./view.component.scss']
+  templateUrl: './view.component.html'
 })
 export class ViewComponent implements OnInit{
   taskForm: FormGroup | any;

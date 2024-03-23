@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { deleteProjectTaskDelete, getProjectTaskList } from 'src/app/shared/store/task/task.action';
-import { ProjectTaskModel } from 'src/app/shared/store/task/task.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 import { ViewComponent } from './../view/view.component';
-import { urls } from 'src/app/lib/urls/urls';
+import { AuthService } from '@shared/services/auth/auth.service';
+import { deleteProjectTaskDelete, getProjectTaskList } from '@shared/redux/task/task.action';
+import { ProjectTaskModel } from '@shared/redux/task/task.model';
+import { Urls } from '@enum/urls';
 
 @Component({
   selector: 'app-task-list',
@@ -56,10 +56,10 @@ export class ListComponent implements OnInit {
   onCreateUpdate(data?: ProjectTaskModel | null) {
     if (data) {
       const encryptedID = this.authService.encrypt(data.id.toString());
-      this.router.navigate([`${urls.project}`, this.id, `${urls.update}`, encryptedID]);
+      this.router.navigate([`${Urls.project}`, this.id, `${Urls.update}`, encryptedID]);
       return;
     }
-    this.router.navigate([`${urls.project}`, this.id, `${urls.create}`]);
+    this.router.navigate([`${Urls.project}`, this.id, `${Urls.create}`]);
   }
   onView(data: ProjectTaskModel) {
     this.dialog.open(ViewComponent, {
@@ -73,7 +73,7 @@ export class ListComponent implements OnInit {
     }).afterClosed().subscribe((result: boolean) => {
       if (result) {
         const encryptedID = this.authService.encrypt(data.id.toString());
-        this.router.navigate([`${urls.project}`, this.id, `${urls.update}`, encryptedID]);
+        this.router.navigate([`${Urls.project}`, this.id, `${Urls.update}`, encryptedID]);
       }
     });
   }

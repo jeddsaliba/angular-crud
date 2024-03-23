@@ -3,12 +3,6 @@
         <mat-form-field class="col-12">
             <mat-label>{{ fieldName }}</mat-label>
             <mat-select [formControlName]="controlName" [multiple]="multiple" (selectionChange)="onChange($event)">
-              <!-- <mat-select-trigger>
-                {{ controlName.value?.[0] || ''}}
-                <span *ngIf="( controlName.value?.length || 0) > 1" class="example-additional-selection">
-                  (+{{( controlName.value?.length || 0) - 1 }} {{ controlName.value?.length === 2 ? 'other' : 'others' }})
-                </span>
-              </mat-select-trigger> -->
               <mat-option *ngFor="let option of options" [value]="option.value">{{ option.label }}</mat-option>
             </mat-select>
             <mat-hint *ngIf="hint">{{ hint }}</mat-hint>

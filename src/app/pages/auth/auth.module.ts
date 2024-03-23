@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
-import { InputModule } from 'src/app/components/form/input/input.module';
 import { LoginComponent } from './login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialThemeModule } from 'src/app/material-theme/material-theme.module';
+import { SharedModule } from '@shared/shared.module';
+import { InputModule } from '@components/form/input/input.module';
+import { LoaderModule } from '@components/loader/loader.module';
 
 
 @NgModule({
@@ -15,10 +15,9 @@ import { MaterialThemeModule } from 'src/app/material-theme/material-theme.modul
   imports: [
     CommonModule,
     AuthRoutingModule,
-    MaterialThemeModule,
-    ReactiveFormsModule,
-    FormsModule,
-    InputModule
+    SharedModule,
+    InputModule,
+    LoaderModule
   ]
 })
 export class AuthModule { }

@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { environment } from '@environments/environment';
 import { Store } from '@ngrx/store';
-import { login } from 'src/app/shared/store/user/user.action';
+import { login } from '@shared/redux/auth/auth.action';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  appName: string = environment.appName;
   loginForm: FormGroup | any;
   isLoaded = true;
   constructor(protected formBuilder: FormBuilder, private store: Store<any>) {}

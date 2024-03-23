@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectTableCurrentPage, selectTableData, selectTableHeads, selectTableMessage, selectTableParams, selectTableTotal } from 'src/app/shared/store/datatable/datatable.selector';
 import { Observable, of } from 'rxjs';
 import { MatSelectChange } from '@angular/material/select';
-import { clearDataTable } from 'src/app/shared/store/datatable/datatable.action';
+import { clearDataTable } from '@shared/redux/datatable/datatable.action';
+import { selectTableCurrentPage, selectTableData, selectTableHeads, selectTableMessage, selectTableParams, selectTableTotal } from '@shared/redux/datatable/datatable.selector';
 
 @Component({
   selector: 'app-datatable',

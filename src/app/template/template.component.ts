@@ -1,7 +1,6 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
-import { map, shareReplay } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, map, shareReplay } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-template',

@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getUserList } from 'src/app/shared/store/user/user.action';
-
+import { getUserList } from '@shared/redux/user/user.action';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html'
 })
 export class ListComponent implements OnInit {
-
   params: any = {
     page: 1,
     limit: 10,

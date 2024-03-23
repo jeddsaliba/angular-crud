@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { MaterialThemeModule } from 'src/app/material-theme/material-theme.module';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from './input.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -13,8 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    MaterialThemeModule,
-    ReactiveFormsModule
+    SharedModule
   ]
 })
 export class InputModule { }

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { DatatableComponent } from './datatable.component';
-import { MaterialThemeModule } from 'src/app/material-theme/material-theme.module';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatatableComponent } from './datatable.component';
+import { SharedModule } from '@shared/shared.module';
+
+
 
 @NgModule({
   declarations: [
@@ -13,9 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    MaterialThemeModule,
-    ReactiveFormsModule,
-    FormsModule,
+    SharedModule
   ]
 })
 export class DatatableModule { }

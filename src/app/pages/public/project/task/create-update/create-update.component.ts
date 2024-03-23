@@ -5,18 +5,19 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { DialogComponent } from '@components/dialog/dialog.component';
 import { Store } from '@ngrx/store';
+import { ProjectModel } from '@shared/redux/project/project.model';
+import { selectProjectDetails } from '@shared/redux/project/project.selector';
+import { ProjectInitialState } from '@shared/redux/project/project.state';
+import { getProjectTaskDetails, postProjectTaskCreate, putProjectTaskUpdate } from '@shared/redux/task/task.action';
+import { ProjectTaskModel } from '@shared/redux/task/task.model';
+import { selectProjectTaskDetails } from '@shared/redux/task/task.selector';
+import { getUserList } from '@shared/redux/user/user.action';
+import { UserModel } from '@shared/redux/user/user.model';
+import { selectUsers } from '@shared/redux/user/user.selector';
+import { AuthService } from '@shared/services/auth/auth.service';
 import { Observable, of } from 'rxjs';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { ProjectModel } from 'src/app/shared/store/project/project.model';
-import { selectProjectDetails } from 'src/app/shared/store/project/project.selector';
-import { getProjectTaskDetails, postProjectTaskCreate, putProjectTaskUpdate } from 'src/app/shared/store/task/task.action';
-import { ProjectTaskModel } from 'src/app/shared/store/task/task.model';
-import { selectProjectTaskDetails } from 'src/app/shared/store/task/task.selector';
-import { UserModel } from 'src/app/shared/store/user/user.model';
-import { getUserList } from 'src/app/shared/store/user/user.action';
-import { selectUsers } from 'src/app/shared/store/user/user.selector';
-import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-create-update',
@@ -47,17 +48,19 @@ export class CreateUpdateComponent implements OnInit {
     this.route.params.subscribe((params: any) => {
       this.id = params.id;
     });
+    this.initForm();
     this.getProjectDetails();
     this.getUsers();
   }
   getProjectDetails() {
     this.details$ = this.store.select(selectProjectDetails);
     this.details$.subscribe((project: ProjectModel) => {
-      this.projectID = this.authService.encrypt(project.id.toString());
-      if (this.id) {
-        this.getDetails();
-      } else {
-        this.initForm();
+      if (project !== ProjectInitialState) {
+        console.log("getProjectDetails", project);
+        this.projectID = this.authService.encrypt(project.id.toString());
+        if (this.id) {
+          this.getDetails();
+        }
       }
     });
   }

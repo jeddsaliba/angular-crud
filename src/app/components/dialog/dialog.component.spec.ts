@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogComponent } from './dialog.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { SharedModule } from '@shared/shared.module';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;
@@ -8,7 +10,20 @@ describe('DialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DialogComponent]
+      declarations: [DialogComponent],
+      imports: [
+        SharedModule
+      ],
+      providers: [
+        {
+          provide: MatDialogRef,
+          useValue: {}
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useValue: {}
+        }
+      ]
     });
     fixture = TestBed.createComponent(DialogComponent);
     component = fixture.componentInstance;

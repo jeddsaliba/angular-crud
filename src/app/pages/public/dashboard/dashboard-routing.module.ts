@@ -8,14 +8,14 @@ const routes: Routes = [
     component: DashboardComponent,
     data: {
       breadcrumb: {
-        label: 'Dashboard'
-      }
-    }
+        label: 'Projects',
+      },
+    },
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DashboardRoutingModule { }
+export class DashboardRoutingModule {}

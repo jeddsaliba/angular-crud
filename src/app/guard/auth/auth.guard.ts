@@ -1,34 +1,20 @@
-import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  /* ActivatedRouteSnapshot, */
-  Router,
-  /* RouterStateSnapshot, */
-  UrlTree,
-} from '@angular/router';
-import { Observable } from 'rxjs';
-import { urls } from 'src/app/lib/urls/urls';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { Urls } from '@enum/urls';
+import { AuthService } from '@shared/services/auth/auth.service';
+import { filter, map } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
-  canActivate(
-    /* next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot */
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-      /* console.log(next);
-      console.log(state); */
-    if (!sessionStorage.getItem('access_token')) {
-      this.router.navigate([`${urls.login}`]);
-      return false;
-    } else {
+export const authGuard: CanActivateFn = () => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+  return authService.getAccessToken().pipe(
+    filter((token) => token !== undefined),
+    map((token) => {
+      if (!token) {
+        router.navigate([`${Urls.login}`]);
+        return false;
+      }
       return true;
-    }
-  }
-}
+    })
+  )
+};

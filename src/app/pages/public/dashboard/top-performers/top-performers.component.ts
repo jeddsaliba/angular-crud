@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { getChartTopPerformers, getChartTopPerformersCancel } from '@shared/redux/chart/chart.action';
+import { ChartTopPerformersModel } from '@shared/redux/chart/chart.model';
+import { selectChartTopPerformers } from '@shared/redux/chart/chart.selector';
 import { ChartConfiguration } from 'chart.js';
 import { Observable, of } from 'rxjs';
-import { getChartTopPerformers, getChartTopPerformersCancel } from 'src/app/shared/store/chart/chart.action';
-import { ChartTopPerformersModel } from 'src/app/shared/store/chart/chart.model';
-import { selectChartTopPerformers } from 'src/app/shared/store/chart/chart.selector';
 
 @Component({
   selector: 'app-top-performers',

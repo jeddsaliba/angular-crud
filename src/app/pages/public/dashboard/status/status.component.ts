@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { getChartStatus, getChartStatusCancel } from '@shared/redux/chart/chart.action';
+import { ChartStatusModel } from '@shared/redux/chart/chart.model';
+import { selectChartStatus } from '@shared/redux/chart/chart.selector';
 import { ChartOptions } from 'chart.js';
 import { Observable, of } from 'rxjs';
-import { getChartStatus, getChartStatusCancel } from 'src/app/shared/store/chart/chart.action';
-import { ChartStatusModel } from 'src/app/shared/store/chart/chart.model';
-import { selectChartStatus } from 'src/app/shared/store/chart/chart.selector';
 
 @Component({
   selector: 'app-status',

@@ -7,11 +7,6 @@ const routes: Routes = [
   {
     path: '',
     component: ListComponent,
-    data: {
-      breadcrumb: {
-        label: 'Users'
-      }
-    },
     children: [
       {
         path: 'profile',
