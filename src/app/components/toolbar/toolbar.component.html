@@ -4,6 +4,7 @@
     <button mat-button [matMenuTriggerFor]="menu">
       <mat-icon class="mr-16">face</mat-icon>
       <span>{{ loggedInUser?.name }}</span>
+      <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="onLogout()">
