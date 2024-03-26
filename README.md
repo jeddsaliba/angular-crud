@@ -24,9 +24,9 @@ To install the Backend (API), click [here](https://github.com/jeddsaliba/laravel
   - For Hashids, you can modify the following in your `environment.ts` and `environment.prod.ts`:
     ```bash
     hashKeys: {
-        salt: 's72GRGmT59LrNdU6vMVmjQKSahF9gJ9ll1Wjmm3wcBFj7op9ty',
+        salt: 'HASH_ID_SALT',
         minLength: 12,
-        alphabet: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+        alphabet: 'HASH_ID_ALPHABET',
     }
     ```
 - [ng2-charts](https://www.npmjs.com/package/ng2-charts)
