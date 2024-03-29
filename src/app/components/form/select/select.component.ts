@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormControlName, FormGroup } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-select',
-  templateUrl: './select.component.html'
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectComponent {
   @Input() formGroup: FormGroup | AbstractControl | any;

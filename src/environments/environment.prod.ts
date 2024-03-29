@@ -8,5 +8,5 @@ export const environment = {
     minLength: 12,
     alphabet: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
   },
-  requestDelay: 3000
+  requestDelay: 0
 };

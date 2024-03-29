@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -12,6 +12,7 @@ import { Observable, of } from 'rxjs';
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewComponent implements OnInit {
   projectForm: FormGroup | any;

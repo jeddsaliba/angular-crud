@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProjectTaskModel } from '@shared/redux/task/task.model';
@@ -12,7 +12,9 @@ export interface DialogData {
 }
 @Component({
   selector: 'app-view',
-  templateUrl: './view.component.html'
+  templateUrl: './view.component.html',
+  styleUrls: ['./view.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewComponent implements OnInit{
   taskForm: FormGroup | any;

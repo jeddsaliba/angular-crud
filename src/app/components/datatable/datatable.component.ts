@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { MatSelectChange } from '@angular/material/select';
@@ -7,7 +7,9 @@ import { selectTableCurrentPage, selectTableData, selectTableHeads, selectTableM
 
 @Component({
   selector: 'app-datatable',
-  templateUrl: './datatable.component.html'
+  templateUrl: './datatable.component.html',
+  styleUrls: ['./datatable.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatatableComponent implements OnInit, OnDestroy {
 

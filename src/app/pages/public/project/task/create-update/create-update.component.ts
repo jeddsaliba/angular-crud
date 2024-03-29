@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   OnInit,
 } from '@angular/core';
@@ -23,6 +24,7 @@ import { Observable, of } from 'rxjs';
   selector: 'app-create-update',
   templateUrl: './create-update.component.html',
   styleUrls: ['./create-update.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateUpdateComponent implements OnInit {
   taskForm: FormGroup | any;
