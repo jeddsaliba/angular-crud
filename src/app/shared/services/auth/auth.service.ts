@@ -20,6 +20,9 @@ export class AuthService {
   logout(): Observable<any> {
     return this.rest.post(`${Urls.auth}/${Urls.logout}`, null);
   }
+  loggedInUser(): Observable<any> {
+    return this.rest.get(`${Urls.auth}/${Urls.user}`);
+  }
   encrypt(value: string) {
     try {
       return this.hashKey.encode(value);

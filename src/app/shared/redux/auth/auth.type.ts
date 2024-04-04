@@ -5,5 +5,9 @@ export enum UserType {
 
     LOGOUT = '[AUTH API] Logout',
     LOGOUT_SUCCESS = '[AUTH API] Logout Success',
-    LOGOUT_CANCEL = '[AUTH API] Logout Cancel'
+    LOGOUT_CANCEL = '[AUTH API] Logout Cancel',
+
+    LOGGED_IN_USER = '[AUTH API] Logged In User',
+    LOGGED_IN_USER_SUCCESS = '[AUTH API] Logged In User Success',
+    LOGGED_IN_USER_CANCEL = '[AUTH API] Logged In User Cancel'
 }

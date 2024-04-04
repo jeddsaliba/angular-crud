@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { loginSuccess, logoutSuccess } from './auth.action';
+import { loggedInUserSuccess, loginSuccess, logoutSuccess } from './auth.action';
 import { catchError, delay, map, of, switchMap, tap } from 'rxjs';
 import { UserType } from './auth.type';
 import { Store } from '@ngrx/store';
@@ -34,7 +34,6 @@ export class AuthEffect {
           tap(({ payload }) => {
             const { result } = payload;
             sessionStorage.setItem('access_token', result?.access_token);
-            sessionStorage.setItem('user', JSON.stringify(result?.user));
             this.store.dispatch(showSnackbar(payload?.message));
             this.store.dispatch(showLoaderCancel());
             this.router.navigate([`${Urls.dashboard}`]);
@@ -63,6 +62,20 @@ export class AuthEffect {
             this.router.navigate([`${Urls.login}`]);
           }),
           catchError(({ error }) => of(showSnackbar(error?.message)))
+        );
+      })
+    );
+  });
+  _loggedInUser = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserType.LOGGED_IN_USER),
+      switchMap(() => {
+        return this.authService.loggedInUser().pipe(
+          map((result) => {
+            return loggedInUserSuccess(result);
+          }),
+          delay(environment.requestDelay),
+          catchError(({ error }) => of(showSnackbar(error?.message), showLoaderCancel()))
         );
       })
     );

@@ -4,7 +4,9 @@ import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 import { AuthModel } from '@shared/redux/auth/auth.model';
-import { logout } from '@shared/redux/auth/auth.action';
+import { loggedInUser, logout } from '@shared/redux/auth/auth.action';
+import { Observable, of } from 'rxjs';
+import { selectLoggedInUser } from '@shared/redux/auth/auth.selector';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,11 +15,12 @@ import { logout } from '@shared/redux/auth/auth.action';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent implements OnInit {
-  loggedInUser: AuthModel | undefined;
+  loggedInUser$: Observable<AuthModel> = of();
   appName: string = environment.appName;
   constructor(public dialog: MatDialog, private store: Store) {}
   ngOnInit(): void {
-    this.loggedInUser = JSON.parse(sessionStorage.getItem('user') || '{}');
+    this.store.dispatch(loggedInUser());
+    this.loggedInUser$ = this.store.select(selectLoggedInUser);
   }
   onLogout(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
