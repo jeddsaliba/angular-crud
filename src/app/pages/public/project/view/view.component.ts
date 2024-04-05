@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { getProjectDetails } from '@shared/redux/project/project.action';
 import { ProjectModel } from '@shared/redux/project/project.model';
 import { selectProjectDetails } from '@shared/redux/project/project.selector';
+import { selectIsRouteChild } from '@shared/redux/shared/shared.selector';
 import { AuthService } from '@shared/services/auth/auth.service';
 import { Observable, of } from 'rxjs';
 
@@ -18,14 +19,16 @@ export class ViewComponent implements OnInit {
   projectForm: FormGroup | any;
   details$: Observable<ProjectModel> = of();
   id?: string;
+  isRouteChild$: Observable<boolean> = of(false);
   constructor(
     public route: ActivatedRoute,
     private store: Store,
     protected formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
   ngOnInit(): void {
+    this.isRouteChild$ = this.store.select(selectIsRouteChild);
     this.route.params.subscribe((params: any) => {
       this.id = params.id;
       this.getDetails();

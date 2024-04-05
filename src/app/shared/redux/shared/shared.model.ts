@@ -10,5 +10,6 @@ export interface SelectOptionModel {
 export interface Shared {
     select_options: SelectOptionModel[],
     show_loader: boolean,
-    snackbar_message: string
+    snackbar_message: string,
+    is_route_child: boolean
 }

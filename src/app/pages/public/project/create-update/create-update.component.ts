@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,6 +12,7 @@ import { Store } from '@ngrx/store';
 import { getProjectDetails, postProjectCreate, putProjectUpdate } from '@shared/redux/project/project.action';
 import { ProjectModel } from '@shared/redux/project/project.model';
 import { selectProjectDetails } from '@shared/redux/project/project.selector';
+import { isRouteChild, isRouteChildCancel } from '@shared/redux/shared/shared.action';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -19,7 +21,7 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreateUpdateComponent implements OnInit {
+export class CreateUpdateComponent implements OnInit, OnDestroy {
   projectForm: FormGroup | any;
   id?: string;
   details$: Observable<ProjectModel> = of();
@@ -30,26 +32,32 @@ export class CreateUpdateComponent implements OnInit {
     public dialog: MatDialog
   ) {}
   ngOnInit(): void {
-    this.route.params.subscribe((params: any) => {
+    this.store.dispatch(isRouteChild(true));
+    this.initForm();
+    this.route.parent?.params.subscribe((params: any) => {
       this.id = params.id;
       if (this.id) {
         this.getProjectDetails();
-      } else {
-        this.initForm();
       }
     });
+  }
+  ngOnDestroy(): void {
+    this.store.dispatch(isRouteChildCancel());
   }
   getProjectDetails() {
     this.store.dispatch(getProjectDetails(this.id));
     this.details$ = this.store.select(selectProjectDetails);
     this.details$.subscribe((project: ProjectModel) => {
-      this.initForm(project);
+      this.projectForm.patchValue({
+        name: project?.name,
+        description: project?.description
+      })
     });
   }
-  initForm(project?: ProjectModel) {
+  initForm() {
     this.projectForm = this.formBuilder.group({
       name: [
-        project?.name,
+        '',
         Validators.compose([
           Validators.required,
           Validators.minLength(4),
@@ -57,7 +65,7 @@ export class CreateUpdateComponent implements OnInit {
         ]),
       ],
       description: [
-        project?.description,
+        '',
         Validators.compose([
           Validators.required,
           Validators.minLength(8),

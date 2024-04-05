@@ -10,4 +10,8 @@ export enum SharedType {
     SHOW_SNACKBAR = '[SHARED] Show Snackbar',
     SHOW_SNACKBAR_SUCCESS = '[SHARED] Show Snackbar Success',
     SHOW_SNACKBAR_CANCEL = '[SHARED] Show Snackbar Cancel',
+
+    IS_ROUTE_CHILD = '[SHARED] Is Route Child',
+    IS_ROUTE_CHILD_SUCCESS = '[SHARED] Is Route Child Success',
+    IS_ROUTE_CHILD_CANCEL = '[SHARED] Is Route Child Cancel',
 }

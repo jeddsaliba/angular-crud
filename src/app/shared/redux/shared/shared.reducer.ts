@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { SharedState } from "./shared.state";
-import { setSelectOptionsCancel, setSelectOptionsSuccess, showLoaderCancel, showLoaderSuccess, showSnackbarCancel, showSnackbarSuccess } from "./shared.action";
+import { isRouteChildCancel, isRouteChildSuccess, setSelectOptionsCancel, setSelectOptionsSuccess, showLoaderCancel, showLoaderSuccess, showSnackbarCancel, showSnackbarSuccess } from "./shared.action";
 
 const _sharedReducer = createReducer(
     SharedState,
@@ -38,6 +38,18 @@ const _sharedReducer = createReducer(
         return {
             ...state,
             snackbar_message: SharedState.snackbar_message
+        }
+    }),
+    on(isRouteChildSuccess, (state, {payload}) => {
+        return {
+            ...state,
+            is_route_child: payload
+        }
+    }),
+    on(isRouteChildCancel, (state) => {
+        return {
+            ...state,
+            is_route_child: SharedState.is_route_child
         }
     }),
 )

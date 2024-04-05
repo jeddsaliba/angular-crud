@@ -4,6 +4,8 @@ import { CreateUpdateComponent } from './create-update/create-update.component';
 import { ViewComponent } from './view/view.component';
 import { ListComponent } from './list/list.component';
 
+import { CreateUpdateComponent as TaskCreateUpdateComponent } from './task/create-update/create-update.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -26,16 +28,35 @@ const routes: Routes = [
         label: 'View',
       },
     },
-    loadChildren: () => import('./task/task.module').then((m) => m.TaskModule),
-  },
-  {
-    path: ':id/update',
-    component: CreateUpdateComponent,
-    data: {
-      breadcrumb: {
-        label: 'Update',
+    children: [
+      {
+        path: 'update',
+        component: CreateUpdateComponent,
+        data: {
+          breadcrumb: {
+            label: 'Update',
+          },
+        }
       },
-    },
+      {
+        path: 'update/:id',
+        component: TaskCreateUpdateComponent,
+        data: {
+          breadcrumb: {
+            label: 'Update Task',
+          },
+        },
+      },
+      {
+        path: 'create',
+        component: TaskCreateUpdateComponent,
+        data: {
+          breadcrumb: {
+            label: 'Create Task',
+          },
+        },
+      },
+    ]
   },
 ];
 

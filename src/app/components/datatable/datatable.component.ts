@@ -12,7 +12,8 @@ import { selectTableCurrentPage, selectTableData, selectTableHeads, selectTableM
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatatableComponent implements OnInit, OnDestroy {
-
+  @Input() title!: string;
+  @Input() subTitle!: string;
   limitOptions: number[] = [10, 25, 50, 100];
   tableData$: Observable<any> = of([]);
   tableHeads$: Observable<any> = of([]);

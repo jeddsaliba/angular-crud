@@ -66,7 +66,6 @@ export class ListComponent implements OnInit {
     this.dialog.open(ViewComponent, {
       data: {
         title: 'Project Task Details',
-        message: 'Are you sure you want to log out?',
         cancelButton: 'Close',
         confirmButton: 'Update',
         task: data

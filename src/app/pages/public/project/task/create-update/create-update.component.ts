@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,6 +12,7 @@ import { Store } from '@ngrx/store';
 import { ProjectModel } from '@shared/redux/project/project.model';
 import { selectProjectDetails } from '@shared/redux/project/project.selector';
 import { ProjectInitialState } from '@shared/redux/project/project.state';
+import { isRouteChild, isRouteChildCancel } from '@shared/redux/shared/shared.action';
 import { getProjectTaskDetails, postProjectTaskCreate, putProjectTaskUpdate } from '@shared/redux/task/task.action';
 import { ProjectTaskModel } from '@shared/redux/task/task.model';
 import { selectProjectTaskDetails } from '@shared/redux/task/task.selector';
@@ -26,7 +28,7 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./create-update.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreateUpdateComponent implements OnInit {
+export class CreateUpdateComponent implements OnInit, OnDestroy {
   taskForm: FormGroup | any;
   details$: Observable<ProjectModel> = of();
   taskDetails$: Observable<ProjectTaskModel> = of();
@@ -47,18 +49,21 @@ export class CreateUpdateComponent implements OnInit {
     public dialog: MatDialog
   ) {}
   ngOnInit(): void {
+    this.store.dispatch(isRouteChild(true));
+    this.initForm();
     this.route.params.subscribe((params: any) => {
       this.id = params.id;
     });
-    this.initForm();
     this.getProjectDetails();
     this.getUsers();
+  }
+  ngOnDestroy(): void {
+    this.store.dispatch(isRouteChildCancel());
   }
   getProjectDetails() {
     this.details$ = this.store.select(selectProjectDetails);
     this.details$.subscribe((project: ProjectModel) => {
       if (project !== ProjectInitialState) {
-        console.log("getProjectDetails", project);
         this.projectID = this.authService.encrypt(project.id.toString());
         if (this.id) {
           this.getDetails();
@@ -84,13 +89,20 @@ export class CreateUpdateComponent implements OnInit {
     );
     this.taskDetails$ = this.store.select(selectProjectTaskDetails);
     this.taskDetails$.subscribe((task: ProjectTaskModel) => {
-      this.initForm(task);
+      this.taskForm.patchValue({
+        name: task?.name,
+        assigned_to: task?.assigned_to,
+        description: task?.description,
+        start_date: task?.start_date,
+        end_date: task?.end_date,
+        status: task?.status
+      });
     });
   }
-  initForm(task?: ProjectTaskModel) {
+  initForm() {
     this.taskForm = this.formBuilder.group({
       name: [
-        task?.name,
+        '',
         Validators.compose([
           Validators.required,
           Validators.minLength(4),
@@ -98,13 +110,13 @@ export class CreateUpdateComponent implements OnInit {
         ]),
       ],
       assigned_to: [
-        task?.assigned_to,
+        '',
         Validators.compose([
           Validators.required
         ]),
       ],
       description: [
-        task?.description,
+        '',
         Validators.compose([
           Validators.required,
           Validators.minLength(8),
@@ -112,19 +124,19 @@ export class CreateUpdateComponent implements OnInit {
         ]),
       ],
       start_date: [
-        task?.start_date,
+        '',
         Validators.compose([
           Validators.required
         ])
       ],
       end_date: [
-        task?.end_date,
+        '',
         Validators.compose([
           Validators.required
         ])
       ],
       status: [
-        task?.status,
+        '',
         Validators.compose([
           Validators.required
         ])

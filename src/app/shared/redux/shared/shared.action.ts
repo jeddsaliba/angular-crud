@@ -12,3 +12,7 @@ export const showLoaderCancel = createAction(SharedType.SHOW_LOADER_CANCEL);
 export const showSnackbar = createAction(SharedType.SHOW_SNACKBAR, (payload: any) => ({payload}));
 export const showSnackbarSuccess = createAction(SharedType.SHOW_SNACKBAR_SUCCESS, (payload: any) => ({payload}));
 export const showSnackbarCancel = createAction(SharedType.SHOW_SNACKBAR_CANCEL);
+
+export const isRouteChild = createAction(SharedType.IS_ROUTE_CHILD, (payload: any) => ({payload}));
+export const isRouteChildSuccess = createAction(SharedType.IS_ROUTE_CHILD_SUCCESS, (payload: any) => ({payload}));
+export const isRouteChildCancel = createAction(SharedType.IS_ROUTE_CHILD_CANCEL);

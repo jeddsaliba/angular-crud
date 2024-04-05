@@ -5,7 +5,6 @@ import { ProjectTaskModel } from '@shared/redux/task/task.model';
 
 export interface DialogData {
   title: string;
-  message: string;
   cancelButton: string;
   confirmButton: string;
   task: ProjectTaskModel;
